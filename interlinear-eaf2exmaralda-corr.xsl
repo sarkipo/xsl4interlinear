@@ -71,13 +71,16 @@
             <xsl:for-each select="*">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/> 
                 <xsl:variable name="ts-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>
-                <xsl:variable name="ts-end" select="$aligned-ann/*/@TIME_SLOT_REF2"/>
-                <xsl:variable name="ts-start-right" select="key('timevalue',key('timeslot',$ts-start)/@TIME_VALUE)[last()]/@TIME_SLOT_ID"/>
-                <xsl:variable name="ts-end-left" select="key('timevalue',key('timeslot',$ts-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
-                <!-- If two time slots have identical values, choose always right one for start border and left one for end border -->
+                <xsl:variable name="ts-end">
+                    <xsl:value-of select="if ($aligned-ann/following-sibling::*[1]) then $aligned-ann/following-sibling::*[1]/*/@TIME_SLOT_REF1 else $aligned-ann/*/@TIME_SLOT_REF2"/>
+                    <!-- Fix 1.02: sentence must end where next sentence starts (not earlier) -->
+                </xsl:variable>
+                <xsl:variable name="ts-start-first" select="key('timevalue',key('timeslot',$ts-start)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
+                <xsl:variable name="ts-end-first" select="key('timevalue',key('timeslot',$ts-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
+                <!-- If two time slots have identical values, FIX 1.01: choose always the first one. The second one should be dropped in common-timeline. -->
                 <!-- Otherwise EXMARALDA complains there are overlapping intervals -->
                 
-                <event start="{$ts-start-right}" end="{$ts-end-left}">
+                <event start="{$ts-start-first}" end="{$ts-end-first}">
                     <ud-information attribute-name="ELAN-ID"><xsl:value-of select="./*/@ANNOTATION_ID"/></ud-information>
                     <ud-information attribute-name="ELAN-REF"><xsl:value-of select="./*/@ANNOTATION_REF"/></ud-information>
                     <ud-information attribute-name="ELAN-PREV"><xsl:value-of select="./*/@PREVIOUS_ANNOTATION"/></ud-information><xsl:value-of select="./*/ANNOTATION_VALUE"/></event>
@@ -93,17 +96,20 @@
             <xsl:for-each-group select="*" group-by="./*/@ANNOTATION_REF">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/> <!-- The aligned annotation which dominates the current one  -->
                 <xsl:variable name="sent-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>   <!-- start/end time slot ids -->
-                <xsl:variable name="sent-end" select="$aligned-ann/*/@TIME_SLOT_REF2"/>     <!-- start/end time slot ids -->
-                <xsl:variable name="sent-start-right" select="key('timevalue',key('timeslot',$sent-start)/@TIME_VALUE)[last()]/@TIME_SLOT_ID"/>
-                <xsl:variable name="sent-end-left" select="key('timevalue',key('timeslot',$sent-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
-                <!-- If two time slots have identical time values, choose always right one for start border and left one for end border -->
+                <xsl:variable name="sent-end">
+                    <xsl:value-of select="if ($aligned-ann/following-sibling::*[1]) then $aligned-ann/following-sibling::*[1]/*/@TIME_SLOT_REF1 else $aligned-ann/*/@TIME_SLOT_REF2"/>
+                    <!-- Fix 1.02: sentence must end where next sentence starts (not earlier) -->
+                </xsl:variable>
+                <xsl:variable name="sent-start-first" select="key('timevalue',key('timeslot',$sent-start)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
+                <xsl:variable name="sent-end-first" select="key('timevalue',key('timeslot',$sent-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
+                <!-- If two time slots have identical values, FIX 1.01: choose always the first one. The second one should be dropped in common-timeline. -->
                 <!-- Otherwise EXMARALDA complains there are overlapping intervals -->
                 <xsl:variable name="tsnumber" select="count(./preceding-sibling::*)-position()"/>
                 <!-- M.Kay: "At this level, the context item is the initial item of the group being processed, and position() and last() refer to the position of this item in a list that contains the initial item of each group, in processing order." -->
                 
                 <xsl:for-each select="current-group()">
-                    <xsl:variable name="word-start"><xsl:value-of select="if (position()=1) then $sent-start-right else concat('T',$tsnumber+position()-1)"/></xsl:variable>
-                    <xsl:variable name="word-end"><xsl:value-of select="if (position()=last()) then $sent-end-left else concat('T',$tsnumber+position())"/></xsl:variable>
+                    <xsl:variable name="word-start"><xsl:value-of select="if (position()=1) then $sent-start-first else concat('T',$tsnumber+position()-1)"/></xsl:variable>
+                    <xsl:variable name="word-end"><xsl:value-of select="if (position()=last()) then $sent-end-first else concat('T',$tsnumber+position())"/></xsl:variable>
                     <event start="{$word-start}" end="{$word-end}"><xsl:value-of select="my:cleanup-tx(./*/ANNOTATION_VALUE)"/> </event>
                 </xsl:for-each>
             </xsl:for-each-group>
@@ -118,17 +124,20 @@
             <xsl:for-each-group select="*" group-by="key('annot',./*/@ANNOTATION_REF)/*/@ANNOTATION_REF"> <!-- should result in grouping by sentence -->
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/> <!-- The aligned annotation which dominates the current one  -->
                 <xsl:variable name="sent-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>   <!-- start/end time slot ids -->
-                <xsl:variable name="sent-end" select="$aligned-ann/*/@TIME_SLOT_REF2"/>     <!-- start/end time slot ids -->
-                <xsl:variable name="sent-start-right" select="key('timevalue',key('timeslot',$sent-start)/@TIME_VALUE)[last()]/@TIME_SLOT_ID"/>
-                <xsl:variable name="sent-end-left" select="key('timevalue',key('timeslot',$sent-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
-                <!-- If two time slots have identical time values, choose always right one for start border and left one for end border -->
+                <xsl:variable name="sent-end">
+                    <xsl:value-of select="if ($aligned-ann/following-sibling::*[1]) then $aligned-ann/following-sibling::*[1]/*/@TIME_SLOT_REF1 else $aligned-ann/*/@TIME_SLOT_REF2"/>
+                    <!-- Fix 1.02: sentence must end where next sentence starts (not earlier) -->
+                </xsl:variable>
+                <xsl:variable name="sent-start-first" select="key('timevalue',key('timeslot',$sent-start)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
+                <xsl:variable name="sent-end-first" select="key('timevalue',key('timeslot',$sent-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
+                <!-- If two time slots have identical values, FIX 1.01: choose always the first one. The second one should be dropped in common-timeline. -->
                 <!-- Otherwise EXMARALDA complains there are overlapping intervals -->
                 <xsl:variable name="tsnumber" select="count(key('annot',./*/@ANNOTATION_REF)/preceding-sibling::*)-position()"/>
                 <!-- M.Kay: "At this level, the context item is the initial item of the group being processed, and position() and last() refer to the position of this item in a list that contains the initial item of each group, in processing order." -->
                 
                 <xsl:for-each-group select="current-group()" group-by="./*/@ANNOTATION_REF"> <!-- This is grouping by word -->
-                    <xsl:variable name="word-start"><xsl:value-of select="if (position()=1) then $sent-start-right else concat('T',$tsnumber+position()-1)"/></xsl:variable>
-                    <xsl:variable name="word-end"><xsl:value-of select="if (position()=last()) then $sent-end-left else concat('T',$tsnumber+position())"/></xsl:variable>
+                    <xsl:variable name="word-start"><xsl:value-of select="if (position()=1) then $sent-start-first else concat('T',$tsnumber+position()-1)"/></xsl:variable>
+                    <xsl:variable name="word-end"><xsl:value-of select="if (position()=last()) then $sent-end-first else concat('T',$tsnumber+position())"/></xsl:variable>
                     <event start="{$word-start}" end="{$word-end}"><xsl:value-of select="my:cleanup-morph(string-join(current-group()/*/ANNOTATION_VALUE,''))"/> </event>
                 </xsl:for-each-group>
             </xsl:for-each-group>
@@ -143,17 +152,20 @@
             <xsl:for-each-group select="*" group-by="key('annot',key('annot',./*/@ANNOTATION_REF)/*/@ANNOTATION_REF)/*/@ANNOTATION_REF"> <!-- should result in grouping by sentence -->
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/> <!-- The aligned annotation which dominates the current one  -->
                 <xsl:variable name="sent-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>   <!-- start/end time slot ids -->
-                <xsl:variable name="sent-end" select="$aligned-ann/*/@TIME_SLOT_REF2"/>     <!-- start/end time slot ids -->
-                <xsl:variable name="sent-start-right" select="key('timevalue',key('timeslot',$sent-start)/@TIME_VALUE)[last()]/@TIME_SLOT_ID"/>
-                <xsl:variable name="sent-end-left" select="key('timevalue',key('timeslot',$sent-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
-                <!-- If two time slots have identical time values, choose always right one for start border and left one for end border -->
+                <xsl:variable name="sent-end">
+                    <xsl:value-of select="if ($aligned-ann/following-sibling::*[1]) then $aligned-ann/following-sibling::*[1]/*/@TIME_SLOT_REF1 else $aligned-ann/*/@TIME_SLOT_REF2"/>
+                    <!-- Fix 1.02: sentence must end where next sentence starts (not earlier) -->
+                </xsl:variable>
+                <xsl:variable name="sent-start-first" select="key('timevalue',key('timeslot',$sent-start)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
+                <xsl:variable name="sent-end-first" select="key('timevalue',key('timeslot',$sent-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
+                <!-- If two time slots have identical values, FIX 1.01: choose always the first one. The second one should be dropped in common-timeline. -->
                 <!-- Otherwise EXMARALDA complains there are overlapping intervals -->
                 <xsl:variable name="tsnumber" select="count(key('annot',key('annot',./*/@ANNOTATION_REF)/*/@ANNOTATION_REF)/preceding-sibling::*)-position()"/>
                 <!-- M.Kay: "At this level, the context item is the initial item of the group being processed, and position() and last() refer to the position of this item in a list that contains the initial item of each group, in processing order." -->
                 
                 <xsl:for-each-group select="current-group()" group-by="key('annot',./*/@ANNOTATION_REF)/*/@ANNOTATION_REF"> <!-- This is grouping by word -->
-                    <xsl:variable name="word-start"><xsl:value-of select="if (position()=1) then $sent-start-right else concat('T',$tsnumber+position()-1)"/></xsl:variable>
-                    <xsl:variable name="word-end"><xsl:value-of select="if (position()=last()) then $sent-end-left else concat('T',$tsnumber+position())"/></xsl:variable>
+                    <xsl:variable name="word-start"><xsl:value-of select="if (position()=1) then $sent-start-first else concat('T',$tsnumber+position()-1)"/></xsl:variable>
+                    <xsl:variable name="word-end"><xsl:value-of select="if (position()=last()) then $sent-end-first else concat('T',$tsnumber+position())"/></xsl:variable>
                     <event start="{$word-start}" end="{$word-end}"><xsl:value-of select="my:cleanup-gloss(string-join(current-group()/*/ANNOTATION_VALUE,''))"/> </event>
                 </xsl:for-each-group>
             </xsl:for-each-group>
@@ -171,9 +183,12 @@
             <xsl:for-each-group select="/*/TIER[substring-before(@TIER_ID,'@')='tx']/*" group-by="REF_ANNOTATION/@ANNOTATION_REF">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(current-group()[1]))"/>  <!-- The aligned annotation which dominates the current one, i.e. the sentence annotation  --> 
                 <xsl:variable name="sent-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/> <!-- sentence start/end time slot ids -->
-                <xsl:variable name="sent-end" select="$aligned-ann/*/@TIME_SLOT_REF2"/>
-                <xsl:variable name="sent-start-right" select="key('timevalue',key('timeslot',$sent-start)/@TIME_VALUE)[last()]/@TIME_SLOT_ID"/> <!-- first/last time slots with identical values -->
-                <xsl:variable name="sent-end-left" select="key('timevalue',key('timeslot',$sent-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
+                <xsl:variable name="sent-end">
+                    <xsl:value-of select="if ($aligned-ann/following-sibling::*[1]) then $aligned-ann/following-sibling::*[1]/*/@TIME_SLOT_REF1 else $aligned-ann/*/@TIME_SLOT_REF2"/>
+                    <!-- Fix 1.02: sentence must end where next sentence starts (not earlier) -->
+                </xsl:variable>
+                <xsl:variable name="sent-start-first" select="key('timevalue',key('timeslot',$sent-start)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/> <!-- first/last time slots with identical values -->
+                <xsl:variable name="sent-end-first" select="key('timevalue',key('timeslot',$sent-end)/@TIME_VALUE)[1]/@TIME_SLOT_ID"/>
     
                 <xsl:variable name="sent-start-time" as="xs:decimal" select="my:sec2msec(key('timeslot',$sent-start)/@TIME_VALUE)"/> <!-- actual sentence start/end time values -->
                 <xsl:variable name="sent-end-time" as="xs:decimal" select="my:sec2msec(key('timeslot',$sent-end)/@TIME_VALUE)"/>
