@@ -30,7 +30,7 @@
                 </meta-information>
                 <speakertable>
                     <speaker id="SPK_unknown">
-                        <abbreviation>SY</abbreviation>
+                        <abbreviation>SPK</abbreviation>
                         <sex value="m"/>
                         <languages-used/>
                         <l1/>
@@ -46,7 +46,21 @@
                     <!-- here go the time slots -->
                 </common-timeline>
                 
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER" />
+                <!-- Here go the tiers. The output order is fixed. -->
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ref@')]" />
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'st@')]" />
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ts@')]" />
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'tx@')]" />
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'md@')]" />
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mb@')]" />
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'gr@')]" />
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ge@')]" />
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'go@')]" />
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ps@')]" />
+<!-- #, IST -->                
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fr@')]" />
+<!-- fe -->
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'nt@')]" />
                 <!--
                 <tier id="ref@unknown" speaker="SPK_unknown" category="ref" type="d" display-name="ref">
                     <ud-tier-information>
@@ -66,8 +80,9 @@
     
     <xsl:template match="TIER[contains($tiers-sent,substring-before(@TIER_ID,'@'))]">
         <!-- sentence-level tiers -->
-        <!-- type "d", start/end as is -->
-        <tier id="{substring-before(@TIER_ID,'@')}" speaker="{if (./@PARTICIPANT) then ./@PARTICIPANT else 'SPK'}" category="{./@LINGUISTIC_TYPE_REF}" type="d" display-name="{substring-before(@TIER_ID,'@')}">
+        <!-- type "d" except for ts which is "t"; start/end as is -->
+        <xsl:variable name="tiername" select="substring-before(@TIER_ID,'@')"/>
+        <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}" type="{if ($tiername='ts') then 't' else 'd'}" display-name="{$tiername}">
             <xsl:for-each select="*">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/> 
                 <xsl:variable name="ts-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>
@@ -91,8 +106,9 @@
 
     <xsl:template match="TIER[contains($tiers-word,substring-before(@TIER_ID,'@'))]">
         <!-- word-level tiers (normally only tx) -->
-        <!-- type "t", INSERT NEW start/end -->
-        <tier id="{substring-before(@TIER_ID,'@')}" speaker="{if (./@PARTICIPANT) then ./@PARTICIPANT else 'SPK'}" category="{./@LINGUISTIC_TYPE_REF}" type="t" display-name="{substring-before(@TIER_ID,'@')}">
+        <!-- type "a", INSERT NEW start/end -->
+        <xsl:variable name="tiername" select="substring-before(@TIER_ID,'@')"/>
+        <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}" type="a" display-name="{$tiername}">
             <xsl:for-each-group select="*" group-by="./*/@ANNOTATION_REF">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/> <!-- The aligned annotation which dominates the current one  -->
                 <xsl:variable name="sent-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>   <!-- start/end time slot ids -->
@@ -120,7 +136,9 @@
     <xsl:template match="TIER[contains($tiers-morph-top,substring-before(@TIER_ID,'@'))]">
         <!-- standalone morph-level tiers (mb, md) -->
         <!-- type "a", stick together for each word -->
-        <tier id="{substring-before(@TIER_ID,'@')}" speaker="{if (./@PARTICIPANT) then ./@PARTICIPANT else 'SPK'}" category="{./@LINGUISTIC_TYPE_REF}" type="a" display-name="{substring-before(@TIER_ID,'@')}">
+        <!-- v1.03: Rename md > mb, mb > mp; set attributes -->
+        <xsl:variable name="tiername" select="if (starts-with(./@TIER_ID,'md')) then 'mb' else 'mp'"/>
+        <tier id="{$tiername}" speaker="SPK_unknown" category="v" type="a" display-name="{$tiername}">
             <xsl:for-each-group select="*" group-by="key('annot',./*/@ANNOTATION_REF)/*/@ANNOTATION_REF"> <!-- should result in grouping by sentence -->
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/> <!-- The aligned annotation which dominates the current one  -->
                 <xsl:variable name="sent-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>   <!-- start/end time slot ids -->
@@ -148,7 +166,8 @@
     <xsl:template match="TIER[contains($tiers-morph-ref,substring-before(@TIER_ID,'@'))]">
         <!-- referring morph-level tiers (gr, ge, go, ps) -->
         <!-- type "a", stick together for each word -->
-        <tier id="{substring-before(@TIER_ID,'@')}" speaker="{if (./@PARTICIPANT) then ./@PARTICIPANT else 'SPK'}" category="{./@LINGUISTIC_TYPE_REF}" type="a" display-name="{substring-before(@TIER_ID,'@')}">
+        <xsl:variable name="tiername" select="substring-before(@TIER_ID,'@')"/>
+        <tier id="{$tiername}" speaker="SPK_unknown" category="{if (starts-with(./@TIER_ID,'g')) then 'v' else $tiername}" type="a" display-name="{$tiername}">
             <xsl:for-each-group select="*" group-by="key('annot',key('annot',./*/@ANNOTATION_REF)/*/@ANNOTATION_REF)/*/@ANNOTATION_REF"> <!-- should result in grouping by sentence -->
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/> <!-- The aligned annotation which dominates the current one  -->
                 <xsl:variable name="sent-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>   <!-- start/end time slot ids -->
