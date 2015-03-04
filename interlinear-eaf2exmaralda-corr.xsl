@@ -20,7 +20,7 @@
             v1.07: renaming md,mb is only performed if not yet done in source (checks if exists 'mp' tier); 
                    supports tier ids with and without @speakername; 
                    rearranged tierformat-table.
-            v1.08: added tiers no,nv,na, also fe if exists.
+            v1.08: added tiers no,nv,na, also fe if exists. 
                    fixed cleanup-gloss to handle multiple replaces in one string.
     -->
     
@@ -632,6 +632,45 @@
                 <property name="font-name">Charis SIL</property>
             </tier-format>
             <tier-format tierref="nt">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis</property>
+            </tier-format>
+            <tier-format tierref="no">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis</property>
+            </tier-format>
+            <tier-format tierref="nv">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis</property>
+            </tier-format>
+            <tier-format tierref="na">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
