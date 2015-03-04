@@ -17,11 +17,16 @@
             v1.05: replacing brackets [[ ]] with (( )) in all cleanups;
                    in tx,mb (=renamed old md) only, strip "deep consonant" and "deep glottal stop".
             v1.06: insert the tierformat-table (copied a formatting template).
+            v1.07: renaming md,mb is only performed if not yet done in source (checks if exists 'mp' tier); 
+                   supports tier ids with and without @speakername; 
+                   rearranged tierformat-table.
+            v1.08: added tiers no,nv,na, also fe if exists.
+                   fixed cleanup-gloss to handle multiple replaces in one string.
     -->
     
-    <xsl:variable name="tiers-sent">st ref ts fr nt</xsl:variable>
+    <xsl:variable name="tiers-sent">st ref ts fr fe nt no nv na</xsl:variable>
     <xsl:variable name="tiers-word">tx</xsl:variable>
-    <xsl:variable name="tiers-morph-top">md mb</xsl:variable>
+    <xsl:variable name="tiers-morph-top">md mb mp</xsl:variable>
     <xsl:variable name="tiers-morph-ref">gr ge go ps</xsl:variable>
     
     <xsl:variable name="filename" select="substring-before(replace(document-uri(.),'^.+/',''),'.')"/>
@@ -60,36 +65,57 @@
                 </common-timeline>
 
                 <!-- Here go the tiers. The output order is fixed. -->
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ref@')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'st@')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ts@')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'tx@')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'md@')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mb@')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'gr@')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ge@')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'go@')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ps@')]">
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ref')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'st')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ts')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'tx')]"/>
+                
+                <!-- v1.07: renaming md,mb is only performed if not yet done in source (checks if exists 'mp' tier) -->
+                <xsl:choose>
+                    <xsl:when test="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mp')]">
+                        <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mb')]"/>
+                        <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mp')]"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'md')]">
+                            <xsl:with-param name="rename" select="'yes'"/>
+                        </xsl:apply-templates>
+                        <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mb')]">
+                            <xsl:with-param name="rename" select="'yes'"/>
+                        </xsl:apply-templates>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'gr')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ge')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'go')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ps')]">
                     <!-- v1.04: adding empty word-level tiers # and IST -->
                     <xsl:with-param name="addtier" select="'# IST'"/>
                 </xsl:apply-templates>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fr@')]">
-                    <xsl:with-param name="addtier" select="'fe'"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fr')]">
+                    <xsl:with-param name="addtier" select="if(/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fe')]) then '' else 'fe'"/>
                     <!-- v1.04: adding empty copy for English translation -->
+                    <!-- v1.08: ...only if not present in the source -->
                 </xsl:apply-templates>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'nt@')]"/>
+                <!-- v1.08: added fe -->
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fe')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'nt')]"/>
+                <!-- v1.08: added no, nv, na -->
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'no')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'nv')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'na')]"/>
             </basic-body>
             <!-- v1.06: insert the tierformat-table (copied a formatting template) -->
             <xsl:copy-of select="$format-table"/>
         </basic-transcription>
     </xsl:template>
 
-    <xsl:template match="TIER[contains($tiers-sent,substring-before(@TIER_ID,'@'))]">
+    <xsl:template match="TIER[contains($tiers-sent,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
         <!-- sentence-level tiers -->
         <!-- type "d" except for ts which is "t"; start/end as is -->
         <!-- v1.04: adding empty copy of fr for English translation -->
         <xsl:param name="addtier" select="''"/>
-        <xsl:variable name="tiername" select="substring-before(@TIER_ID,'@')"/>
+        <xsl:variable name="tiername" select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
         <xsl:variable name="maintier">
             <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}"
                 type="{if ($tiername='ts') then 't' else 'd'}" display-name="{$tiername}">
@@ -138,10 +164,10 @@
     </xsl:template>
 
 
-    <xsl:template match="TIER[contains($tiers-word,substring-before(@TIER_ID,'@'))]">
+    <xsl:template match="TIER[contains($tiers-word,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
         <!-- word-level tiers (normally only tx) -->
         <!-- type "a", INSERT NEW start/end -->
-        <xsl:variable name="tiername" select="substring-before(@TIER_ID,'@')"/>
+        <xsl:variable name="tiername" select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
         <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}" type="a" display-name="{$tiername}">
             <xsl:for-each-group select="*" group-by="./*/@ANNOTATION_REF">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/>
@@ -180,11 +206,13 @@
     </xsl:template>
 
 
-    <xsl:template match="TIER[contains($tiers-morph-top,substring-before(@TIER_ID,'@'))]">
+    <xsl:template match="TIER[contains($tiers-morph-top,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
+        <xsl:param name="rename" select="'no'"/>
         <!-- standalone morph-level tiers (mb, md) -->
         <!-- type "a", stick together for each word -->
         <!-- v1.03: Rename md>mb, mb>mp; set attributes -->
-        <xsl:variable name="tiername" select="if (starts-with(./@TIER_ID,'md')) then 'mb' else 'mp'"/>
+        <!-- v1.07: renaming md,mb is only performed if not yet done in source (checks if exists 'mp' tier) -->
+        <xsl:variable name="tiername" select="if ($rename='no') then (if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID) else if (starts-with(./@TIER_ID,'md')) then 'mb' else 'mp'"/>
         <tier id="{$tiername}" speaker="SPK_unknown" category="v" type="a" display-name="{$tiername}">
             <xsl:for-each-group select="*" group-by="key('annot',./*/@ANNOTATION_REF)/*/@ANNOTATION_REF">
                 <!-- should result in grouping by sentence -->
@@ -227,12 +255,12 @@
     </xsl:template>
 
 
-    <xsl:template match="TIER[contains($tiers-morph-ref,substring-before(@TIER_ID,'@'))]">
+    <xsl:template match="TIER[contains($tiers-morph-ref,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
         <!-- referring morph-level tiers (gr, ge, go, ps) -->
         <!-- type "a", stick together for each word -->
         <!-- v1.04: adding empty word-level tiers # and IST -->
         <xsl:param name="addtier" select="''"/>
-        <xsl:variable name="tiername" select="substring-before(@TIER_ID,'@')"/>
+        <xsl:variable name="tiername" select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
         <xsl:variable name="maintier">
             <tier id="{$tiername}" speaker="SPK_unknown"
                 category="{if (starts-with(./@TIER_ID,'g')) then 'v' else $tiername}" type="a"
@@ -299,12 +327,12 @@
 
     <xsl:template match="TIME_ORDER">
         <xsl:variable name="ts-original">
-            <xsl:for-each select="TIME_SLOT">
-                <tli id="{./@TIME_SLOT_ID}" time="{my:sec2msec(./@TIME_VALUE)}" type="appl"/>
-            </xsl:for-each>
+            <xsl:for-each-group select="TIME_SLOT" group-by="./@TIME_VALUE">
+                <tli id="{current-group()[1]/@TIME_SLOT_ID}" time="{my:sec2msec(current-group()[1]/@TIME_VALUE)}" type="appl"/>
+            </xsl:for-each-group>
         </xsl:variable>
         <xsl:variable name="ts-supplemental">
-            <xsl:for-each-group select="/*/TIER[substring-before(@TIER_ID,'@')='tx']/*"
+            <xsl:for-each-group select="/*/TIER[starts-with(@TIER_ID,'tx')]/*"
                 group-by="REF_ANNOTATION/@ANNOTATION_REF">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(current-group()[1]))"/>
                 <!-- The aligned annotation which dominates the current one, i.e. the sentence annotation  -->
@@ -377,14 +405,16 @@
         <xsl:param name="tiername" as="xs:string"/>
         <xsl:variable name="bothtiers" select="replace(my:cleanup-brackets($in),'-[03]$','')"/>
         <!-- strip final -0 and -3 -->
-        <xsl:value-of select="if ($tiername='mb') then replace(replace($bothtiers,'[ˀ]',''),'--','-') else $bothtiers"/>
+        <xsl:value-of select="if ($tiername='mb') then replace(replace($bothtiers,'([ˀ]|-[ˀ]$)',''),'--','-') else $bothtiers"/>
         <!-- v1.05: in mb (=renamed old md, and it is the new name this function will get) only, strip "deep consonant" and "deep glottal stop" -->
+        <!-- v1.07: also strip final '-' -->
     </xsl:function>
 
     <xsl:function name="my:cleanup-gloss" as="xs:string">
         <xsl:param name="in" as="xs:string"/>
-        <xsl:value-of select="replace(my:cleanup-brackets($in),'-(\[.+\])','.$1')"/>
+        <xsl:value-of select="replace(my:cleanup-brackets($in),'-(\[.+?\])','.$1')"/>
         <!-- replace - with . before [] -->
+        <!-- v1.08: fixed to lazy quant. to handle multiple replaces in one string -->
     </xsl:function>
 
     <!-- v1.05: replacing brackets [[ ]] with (( )) for all tiers -->
@@ -406,7 +436,7 @@
         <tierformat-table>
             <timeline-item-format show-every-nth-numbering="1" show-every-nth-absolute="1" absolute-time-format="time"
                 miliseconds-digits="1"/>
-            <tier-format tierref="ps@unknown">
+            <tier-format tierref="ref">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
@@ -419,7 +449,46 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Charis SIL</property>
             </tier-format>
-            <tier-format tierref="ge@unknown">
+            <tier-format tierref="st">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Bold</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="ts">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">#R00G99B33</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="tx">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">#R00G00Bcc</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="mb">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
@@ -432,7 +501,7 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Charis SIL</property>
             </tier-format>
-            <tier-format tierref="ref@unknown">
+            <tier-format tierref="md">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
@@ -445,7 +514,124 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Charis SIL</property>
             </tier-format>
-            <tier-format tierref="nt@unknown">
+            <tier-format tierref="mp">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="gr">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="ge">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="go">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="ps">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="#">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Times New Roman</property>
+            </tier-format>
+            <tier-format tierref="IST">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Times New Roman</property>
+            </tier-format>
+            <tier-format tierref="fr">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">#RccG00B00</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="fe">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="nt">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
@@ -497,19 +683,6 @@
                 <property name="font-size">9</property>
                 <property name="font-name">Times New Roman</property>
             </tier-format>
-            <tier-format tierref="mp@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">black</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
             <tier-format tierref="TIE1">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
@@ -523,124 +696,7 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Times New Roman</property>
             </tier-format>
-            <tier-format tierref="gr@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">black</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
             <tier-format tierref="TIE0">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">black</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
-            <tier-format tierref="tx@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">#R00G00Bcc</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
-            <tier-format tierref="md@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">black</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
-            <tier-format tierref="mb@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">black</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
-            <tier-format tierref="ts@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">#R00G99B33</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
-            <tier-format tierref="fg@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">black</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">9</property>
-                <property name="font-name">Times New Roman</property>
-            </tier-format>
-            <tier-format tierref="fe@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">black</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
-            <tier-format tierref="st@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Bold</property>
-                <property name="font-color">black</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
-            <tier-format tierref="tn@unknown">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
@@ -665,32 +721,6 @@
                 <property name="chunk-border"/>
                 <property name="font-size">8</property>
                 <property name="font-name">Times New Roman</property>
-            </tier-format>
-            <tier-format tierref="te@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">black</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
-            </tier-format>
-            <tier-format tierref="fr@unknown">
-                <property name="row-height-calculation">Generous</property>
-                <property name="fixed-row-height">10</property>
-                <property name="font-face">Plain</property>
-                <property name="font-color">#RccG00B00</property>
-                <property name="chunk-border-style">solid</property>
-                <property name="bg-color">white</property>
-                <property name="text-alignment">Left</property>
-                <property name="chunk-border-color">#R00G00B00</property>
-                <property name="chunk-border"/>
-                <property name="font-size">12</property>
-                <property name="font-name">Charis SIL</property>
             </tier-format>
             <tier-format tierref="ROW-LABEL">
                 <property name="row-height-calculation">Generous</property>
