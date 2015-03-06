@@ -22,6 +22,7 @@
                    rearranged tierformat-table.
             v1.08: added tiers no,nv,na, also fe if exists. 
                    fixed cleanup-gloss to handle multiple replaces in one string.
+            v1.09: set tier types: 't' for tx, 'd' for ts
     -->
     
     <xsl:variable name="tiers-sent">st ref ts fr fe nt no nv na</xsl:variable>
@@ -112,13 +113,12 @@
 
     <xsl:template match="TIER[contains($tiers-sent,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
         <!-- sentence-level tiers -->
-        <!-- type "d" except for ts which is "t"; start/end as is -->
+        <!-- type "d" (v1.09: for all); start/end as is -->
         <!-- v1.04: adding empty copy of fr for English translation -->
         <xsl:param name="addtier" select="''"/>
         <xsl:variable name="tiername" select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
         <xsl:variable name="maintier">
-            <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}"
-                type="{if ($tiername='ts') then 't' else 'd'}" display-name="{$tiername}">
+            <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}" type="d" display-name="{$tiername}">
                 <xsl:for-each select="*">
                     <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/>
                     <xsl:variable name="ts-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>
@@ -166,9 +166,9 @@
 
     <xsl:template match="TIER[contains($tiers-word,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
         <!-- word-level tiers (normally only tx) -->
-        <!-- type "a", INSERT NEW start/end -->
+        <!-- type "t" (v1.09), INSERT NEW start/end -->
         <xsl:variable name="tiername" select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
-        <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}" type="a" display-name="{$tiername}">
+        <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}" type="t" display-name="{$tiername}">
             <xsl:for-each-group select="*" group-by="./*/@ANNOTATION_REF">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/>
                 <!-- The aligned annotation which dominates the current one  -->
