@@ -23,13 +23,14 @@
             v1.08: added tiers no,nv,na, also fe if exists. 
                    fixed cleanup-gloss to handle multiple replaces in one string.
             v1.09: set tier types: 't' for tx, 'd' for ts
+            v1.10: add so tier; if ft present in source, import it as fe
     -->
-    
-    <xsl:variable name="tiers-sent">st ref ts fr fe nt no nv na</xsl:variable>
+
+    <xsl:variable name="tiers-sent">st so ref ts fr fe ft nt no nv na</xsl:variable>
     <xsl:variable name="tiers-word">tx</xsl:variable>
     <xsl:variable name="tiers-morph-top">md mb mp</xsl:variable>
     <xsl:variable name="tiers-morph-ref">gr ge go ps</xsl:variable>
-    
+
     <xsl:variable name="filename" select="substring-before(replace(document-uri(.),'^.+/',''),'.')"/>
 
     <xsl:key name="annot" match="ANNOTATION" use="string(*/@ANNOTATION_ID)"/>
@@ -41,7 +42,9 @@
             <head>
                 <meta-information>
                     <project-name>Nganasan</project-name>
-                    <transcription-name><xsl:value-of select="$filename"/></transcription-name>
+                    <transcription-name>
+                        <xsl:value-of select="$filename"/>
+                    </transcription-name>
                     <referenced-file url="{concat($filename,'.wav')}"/>
                     <ud-meta-information/>
                     <comment/>
@@ -68,9 +71,10 @@
                 <!-- Here go the tiers. The output order is fixed. -->
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ref')]"/>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'st')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'so')]"/>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ts')]"/>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'tx')]"/>
-                
+
                 <!-- v1.07: renaming md,mb is only performed if not yet done in source (checks if exists 'mp' tier) -->
                 <xsl:choose>
                     <xsl:when test="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mp')]">
@@ -94,12 +98,14 @@
                     <xsl:with-param name="addtier" select="'# IST'"/>
                 </xsl:apply-templates>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fr')]">
-                    <xsl:with-param name="addtier" select="if(/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fe')]) then '' else 'fe'"/>
+                    <xsl:with-param name="addtier"
+                        select="if(/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fe') or starts-with(@TIER_ID,'ft')]) then '' else 'fe'"/>
                     <!-- v1.04: adding empty copy for English translation -->
-                    <!-- v1.08: ...only if not present in the source -->
+                    <!-- v1.08-1.09: ...only if fe or ft not present in the source -->
                 </xsl:apply-templates>
                 <!-- v1.08: added fe -->
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fe')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ft')]"/>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'nt')]"/>
                 <!-- v1.08: added no, nv, na -->
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'no')]"/>
@@ -111,12 +117,18 @@
         </basic-transcription>
     </xsl:template>
 
-    <xsl:template match="TIER[contains($tiers-sent,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
+    <xsl:template
+        match="TIER[contains($tiers-sent,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
         <!-- sentence-level tiers -->
         <!-- type "d" (v1.09: for all); start/end as is -->
         <!-- v1.04: adding empty copy of fr for English translation -->
         <xsl:param name="addtier" select="''"/>
-        <xsl:variable name="tiername" select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
+        <xsl:variable name="tiername">
+            <!-- v1.10: always rename ft to fe -->
+            <xsl:variable name="origtiername"
+                select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
+            <xsl:value-of select="if ($origtiername = 'ft') then 'fe' else $origtiername"/>
+        </xsl:variable>
         <xsl:variable name="maintier">
             <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}" type="d" display-name="{$tiername}">
                 <xsl:for-each select="*">
@@ -164,10 +176,12 @@
     </xsl:template>
 
 
-    <xsl:template match="TIER[contains($tiers-word,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
+    <xsl:template
+        match="TIER[contains($tiers-word,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
         <!-- word-level tiers (normally only tx) -->
         <!-- type "t" (v1.09), INSERT NEW start/end -->
-        <xsl:variable name="tiername" select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
+        <xsl:variable name="tiername"
+            select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
         <tier id="{$tiername}" speaker="SPK_unknown" category="{$tiername}" type="t" display-name="{$tiername}">
             <xsl:for-each-group select="*" group-by="./*/@ANNOTATION_REF">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(.))"/>
@@ -206,13 +220,15 @@
     </xsl:template>
 
 
-    <xsl:template match="TIER[contains($tiers-morph-top,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
+    <xsl:template
+        match="TIER[contains($tiers-morph-top,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
         <xsl:param name="rename" select="'no'"/>
         <!-- standalone morph-level tiers (mb, md) -->
         <!-- type "a", stick together for each word -->
         <!-- v1.03: Rename md>mb, mb>mp; set attributes -->
         <!-- v1.07: renaming md,mb is only performed if not yet done in source (checks if exists 'mp' tier) -->
-        <xsl:variable name="tiername" select="if ($rename='no') then (if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID) else if (starts-with(./@TIER_ID,'md')) then 'mb' else 'mp'"/>
+        <xsl:variable name="tiername"
+            select="if ($rename='no') then (if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID) else if (starts-with(./@TIER_ID,'md')) then 'mb' else 'mp'"/>
         <tier id="{$tiername}" speaker="SPK_unknown" category="v" type="a" display-name="{$tiername}">
             <xsl:for-each-group select="*" group-by="key('annot',./*/@ANNOTATION_REF)/*/@ANNOTATION_REF">
                 <!-- should result in grouping by sentence -->
@@ -255,12 +271,14 @@
     </xsl:template>
 
 
-    <xsl:template match="TIER[contains($tiers-morph-ref,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
+    <xsl:template
+        match="TIER[contains($tiers-morph-ref,if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID)]">
         <!-- referring morph-level tiers (gr, ge, go, ps) -->
         <!-- type "a", stick together for each word -->
         <!-- v1.04: adding empty word-level tiers # and IST -->
         <xsl:param name="addtier" select="''"/>
-        <xsl:variable name="tiername" select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
+        <xsl:variable name="tiername"
+            select="if (contains(@TIER_ID,'@')) then substring-before(@TIER_ID,'@') else @TIER_ID"/>
         <xsl:variable name="maintier">
             <tier id="{$tiername}" speaker="SPK_unknown"
                 category="{if (starts-with(./@TIER_ID,'g')) then 'v' else $tiername}" type="a"
@@ -328,12 +346,12 @@
     <xsl:template match="TIME_ORDER">
         <xsl:variable name="ts-original">
             <xsl:for-each-group select="TIME_SLOT" group-by="./@TIME_VALUE">
-                <tli id="{current-group()[1]/@TIME_SLOT_ID}" time="{my:sec2msec(current-group()[1]/@TIME_VALUE)}" type="appl"/>
+                <tli id="{current-group()[1]/@TIME_SLOT_ID}" time="{my:sec2msec(current-group()[1]/@TIME_VALUE)}"
+                    type="appl"/>
             </xsl:for-each-group>
         </xsl:variable>
         <xsl:variable name="ts-supplemental">
-            <xsl:for-each-group select="/*/TIER[starts-with(@TIER_ID,'tx')]/*"
-                group-by="REF_ANNOTATION/@ANNOTATION_REF">
+            <xsl:for-each-group select="/*/TIER[starts-with(@TIER_ID,'tx')]/*" group-by="REF_ANNOTATION/@ANNOTATION_REF">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(current-group()[1]))"/>
                 <!-- The aligned annotation which dominates the current one, i.e. the sentence annotation  -->
                 <xsl:variable name="sent-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>
@@ -384,7 +402,7 @@
             </xsl:choose>
         </xsl:for-each>
     </xsl:function>
-    
+
     <!-- v1.05: replacing brackets [[ ]] with (( )) in all cleanups -->
 
     <xsl:function name="my:cleanup-ts" as="xs:string">
@@ -405,7 +423,8 @@
         <xsl:param name="tiername" as="xs:string"/>
         <xsl:variable name="bothtiers" select="replace(my:cleanup-brackets($in),'-[03]$','')"/>
         <!-- strip final -0 and -3 -->
-        <xsl:value-of select="if ($tiername='mb') then replace(replace($bothtiers,'([ˀ]|-[ˀ]$)',''),'--','-') else $bothtiers"/>
+        <xsl:value-of
+            select="if ($tiername='mb') then replace(replace($bothtiers,'([ˀ]|-[ˀ]$)',''),'--','-') else $bothtiers"/>
         <!-- v1.05: in mb (=renamed old md, and it is the new name this function will get) only, strip "deep consonant" and "deep glottal stop" -->
         <!-- v1.07: also strip final '-' -->
     </xsl:function>
@@ -450,6 +469,19 @@
                 <property name="font-name">Charis SIL</property>
             </tier-format>
             <tier-format tierref="st">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Bold</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="so">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Bold</property>
