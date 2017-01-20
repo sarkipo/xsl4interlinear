@@ -7,7 +7,7 @@
 
     <!--
             This is the transform from ELAN eaf format into EXMARaLDA exb, tuned for Nganasan project.
-            This version is intended for Toolbox-originating files. See interlinear-flexeaf2exmaralda-corr.xsl for conversion from SIL FLEx.
+            This version is intended for Toolbox-originating files. See interlinear-flexeaf2exmaralda.xsl for conversion from SIL FLEx.
             (c) Alexandre Arkhipov, MSU, 2015
 
             This is the batch version intended for transforming multiple files at once.
