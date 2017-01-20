@@ -14,11 +14,12 @@
             This transform is for a single file containing multiple texts. 
             Based on transform for Nganasan.
             Based on the batch version based on interlinear-eaf2exmaralda.xsl v1.11.
-            v1.20: Transform for single files.
-            v1.21: ... is replaced with … and both are counted as a (punctuation) word. (27.02.2016)
+            v2.02: Added sentence-numbering options (flat, para, both); moved all parameters to settings file; added couple of tier styles
+            v2.01: Added lang attribute to tier-word template (23.11.2016)
             v2.00: Many parameters related to specific tiers etc. are now read from a settings file.
                    NB: the cleanup functions are NOT yet called according to the settings file, but controlled internally
-            v2.01: Added lang attribute to tier-word template (23.11.2016)
+            v1.21: ... is replaced with … and both are counted as a (punctuation) word. (27.02.2016)
+            v1.20: Transform for single files.
     -->
 
     <xsl:variable name="filename" select="replace(replace(base-uri(), '^.*/', ''), '.flextext', '')"/>
@@ -27,15 +28,21 @@
     <xsl:variable name="tiers-gloss">ge gr mc hn</xsl:variable>
 
 
-    <xsl:param name="timestart" as="xs:decimal" select="4.0"/>
-    <!-- Time offset for first word -->
+<!--    <xsl:param name="timestart" as="xs:decimal" select="4.0"/>
+    <!-\- Time offset for first word -\->
     <xsl:param name="timestep" as="xs:decimal" select="0.5"/>
-    <!-- Mean word length in sec -->
+    <!-\- Mean word length in sec -\->
+    <xsl:param name="segnum-format" as="xs:string" select="'flat'"/>
 
+-->    <!-- flat numbering or para.sent numbering for sentences; set parameter to 'flat' or 'para', respectively, or 'both' -->
+    
     <xsl:param name="settings-file" select="'settings.xml'"/>
     <xsl:variable name="settings" select="doc($settings-file)"/>
     <xsl:variable name="baseline" select="$settings//tiers/baseline/@lang"/>
-
+    <xsl:variable name="timestart" as="xs:decimal" select="$settings//timeline/@start"/>
+    <xsl:variable name="timestep" as="xs:decimal" select="$settings//timeline/@step"/>
+    <xsl:variable name="segnum-format" select="$settings//sentence-number/@format"/>
+    
     <xsl:template match="/">
         <conversion-report filename="{$filename}">
             <conversion-settings filename="{$settings-file}">
@@ -214,18 +221,30 @@
                 <!-- +position()-1 -->
                 <xsl:variable name="ts-end" select="$ts-start + count(.//word[my:word(.)])"/>
                 <xsl:variable name="value">
-                    <xsl:value-of
-                        select="
-                            ./item[@type = $itemtype and (if ($lang eq '') then
-                                true()
-                            else
-                                @lang = $lang)]"
-                        separator=" || "/>
+                    <xsl:value-of select="./item[@type = $itemtype and (if ($lang eq '') then true() else @lang = $lang)]" separator=" || "/>
                 </xsl:variable>
                 <event start="{concat('T',$ts-start)}" end="{concat('T',$ts-end)}">
-                    <xsl:value-of
-                        select="concat($prefix, my:cleanup-brackets(my:sent-renum($value, $display)))"
-                    />
+                    <!-- for ref tier, output the filename dot (paragraph number dot) sentence number -->
+                    <!-- v2.02: if format is 'flat' then just count the sentences through the whole text -->
+                    <xsl:choose>
+                        <xsl:when test="$display='ref'">
+                            <xsl:choose>
+                                <xsl:when test="$segnum-format='para'">
+                                    <xsl:value-of select="concat($prefix, my:cleanup-brackets(my:sent-renum($value)))"/>
+                                </xsl:when>
+                                <xsl:when test="$segnum-format='both'">
+                                    <xsl:value-of select="concat($prefix, format-number(position(),'#000'), ' (', my:cleanup-brackets(my:sent-renum($value)), ')' )"/>
+                                </xsl:when>
+                                <!-- 'flat' is applied otherwise -->
+                                <xsl:otherwise>
+                                    <xsl:value-of select="concat($prefix, format-number(position(),'#000'))"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat($prefix, my:cleanup-brackets($value))"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </event>
             </xsl:for-each>
         </tier>
@@ -428,18 +447,12 @@
     <!-- convert to a number and pad with zeroes to 3 digits -->
     <xsl:function name="my:sent-renum" as="xs:string">
         <xsl:param name="in" as="xs:string"/>
-        <xsl:param name="tier" as="xs:string"/>
         <xsl:choose>
-            <xsl:when test="$tier = 'ref' and substring-after($in, '.') != ''">
-                <xsl:value-of
-                    select="concat(format-number(number(substring-before($in, '.')), '#000'), '.', format-number(number(substring-after($in, '.')), '#000'))"
-                />
-            </xsl:when>
-            <xsl:when test="$tier = 'ref' and substring-after($in, '.') = ''">
-                <xsl:value-of select="format-number(number($in), '#000')"/>
+            <xsl:when test="substring-after($in, '.')!=''">
+                <xsl:value-of select="concat(format-number(number(substring-before($in,'.')),'#000'),'.',format-number(number(substring-after($in,'.')),'#000'))"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$in"/>
+                <xsl:value-of select="format-number(number($in),'#000')"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -699,6 +712,72 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Charis SIL</property>
             </tier-format>
+            <tier-format tierref="BOR">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="BOR-Typ">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="BOR-Phon">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="BOR-Morph">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="CS">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            
             <tier-format tierref="#">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
@@ -739,6 +818,19 @@
                 <property name="font-name">Charis SIL</property>
             </tier-format>
             <tier-format tierref="fr">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">#RccG00B00</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="fr_ed">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
