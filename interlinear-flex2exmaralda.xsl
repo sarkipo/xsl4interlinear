@@ -7,31 +7,35 @@
 
     <!--
             This is the transform from SIL FLEx flextext format into EXMARaLDA exb, tuned for Nganasan project.
+            See interlinear-flex2exmaralda-var-multi.xsl for externally configurable version.
             See interlinear-eaf2exmaralda.xsl for conversion from ELAN.
-            (c) Alexandre Arkhipov, MSU, 2015
+            (c) Alexandre Arkhipov, MSU, 2015+
 
             This transform is for single files. 
             Based on the batch version based on interlinear-eaf2exmaralda.xsl v1.11.
-            v1.20: Transform for single files.
-            v1.21: ... is replaced with … and both are counted as a (punctuation) word. (27.02.2016)
-            v1.22: added frp, ntp
+            v1.24: added empty BOR, BOR-*, CS; removed go; import ps rather than create empty; three options of sentence numbering: flat, para or both
             v1.23: removed ntp
+            v1.22: added frp, ntp
+            v1.21: ... is replaced with … and both are counted as a (punctuation) word. (27.02.2016)
+            v1.20: Transform for single files.
     -->
     
     <xsl:variable name="filename" select="replace(replace(base-uri(),'^.*/',''),'.flextext','')"/>
     <xsl:variable name="speaker" select="if(substring-before($filename,'_') = '') then 'SPK' else substring-before($filename,'_')"/>
     
 
-    <xsl:variable name="tiers-sent">st so ref ts fr frp fe ft nt nv na</xsl:variable>
+    <xsl:variable name="tiers-sent">st so ref ts fr fr_ed fe ft nt nv na</xsl:variable>
     <xsl:variable name="tiers-word">tx ps SeR SyF IST</xsl:variable>
     <xsl:variable name="tiers-morph">mb mp</xsl:variable>
-    <xsl:variable name="tiers-gloss">gr ge go mc</xsl:variable>
+    <xsl:variable name="tiers-gloss">gr ge mc</xsl:variable>
 
     <xsl:param name="timestart" as="xs:decimal" select="4.0"/>
     <!-- Time offset for first word -->
     <xsl:param name="timestep" as="xs:decimal" select="0.5"/>
     <!-- Mean word length in sec -->
-
+    <xsl:param name="segnum-format" as="xs:string" select="'flat'"/>
+    <!-- flat numbering or para.sent numbering for sentences; set parameter to 'flat' or 'para', respectively, or 'both' -->
+    
     <xsl:template match="/">
         <basic-transcription>
             <head>
@@ -136,13 +140,6 @@
                     <xsl:with-param name="display" select="'ge'"/>
                 </xsl:call-template>
                 <xsl:call-template name="tier-morph">
-                    <!-- go -->
-                    <xsl:with-param name="itemtype" select="'gls'"/>
-                    <xsl:with-param name="lang" select="'ru-Qaaa-x-Ourg'"/>
-                    <xsl:with-param name="cat" select="'go'"/>
-                    <xsl:with-param name="display" select="'go'"/>
-                </xsl:call-template>
-                <xsl:call-template name="tier-morph">
                     <!-- mc -->
                     <xsl:with-param name="itemtype" select="'msa'"/>
                     <xsl:with-param name="lang" select="'en'"/>
@@ -151,10 +148,14 @@
                 </xsl:call-template>
 
 
-                <xsl:call-template name="tier-word-new">
+                <xsl:call-template name="tier-word">
                     <!-- ps -->
+                    <xsl:with-param name="itemtype" select="'pos'"/>
+                    <xsl:with-param name="lang" select="'en'"/>
+                    <xsl:with-param name="cat" select="'k'"/>
                     <xsl:with-param name="display" select="'ps'"/>
                 </xsl:call-template>
+
                 <xsl:call-template name="tier-word-new">
                     <!-- SeR -->
                     <xsl:with-param name="display" select="'SeR'"/>
@@ -167,7 +168,27 @@
                     <!-- IST -->
                     <xsl:with-param name="display" select="'IST'"/>
                 </xsl:call-template>
-
+                <xsl:call-template name="tier-word-new">
+                    <!-- BOR -->
+                    <xsl:with-param name="display" select="'BOR'"/>
+                </xsl:call-template>
+                <xsl:call-template name="tier-word-new">
+                    <!-- BOR-Typ -->
+                    <xsl:with-param name="display" select="'BOR-Typ'"/>
+                </xsl:call-template>
+                <xsl:call-template name="tier-word-new">
+                    <!-- BOR-Phon -->
+                    <xsl:with-param name="display" select="'BOR-Phon'"/>
+                </xsl:call-template>
+                <xsl:call-template name="tier-word-new">
+                    <!-- BOR-Morph -->
+                    <xsl:with-param name="display" select="'BOR-Morph'"/>
+                </xsl:call-template>
+                <xsl:call-template name="tier-word-new">
+                    <!-- CS -->
+                    <xsl:with-param name="display" select="'CS'"/>
+                </xsl:call-template>
+                
 
                 <xsl:call-template name="tier-sent">
                     <!-- fr -->
@@ -177,11 +198,11 @@
                     <xsl:with-param name="display" select="'fr'"/>
                 </xsl:call-template>
                 <xsl:call-template name="tier-sent">
-                    <!-- frp -->
+                    <!-- fr_ed -->
                     <xsl:with-param name="itemtype" select="'gls'"/>
                     <xsl:with-param name="lang" select="'ru-Qaaa-x-Ourg'"/>
-                    <xsl:with-param name="cat" select="'frp'"/>
-                    <xsl:with-param name="display" select="'frp'"/>
+                    <xsl:with-param name="cat" select="'fr_ed'"/>
+                    <xsl:with-param name="display" select="'fr_ed'"/>
                 </xsl:call-template>
                 <xsl:call-template name="tier-sent">
                     <!-- fe -->
@@ -224,8 +245,29 @@
                     <xsl:value-of select="./item[@type=$itemtype and (if ($lang eq '') then true() else @lang=$lang)]"
                         separator=" || "/>
                 </xsl:variable>
+                <xsl:variable name="phrase-num" select="position()"/>
                 <event start="{concat('T',$ts-start)}" end="{concat('T',$ts-end)}">
-                    <xsl:value-of select="concat($prefix, my:cleanup-brackets(my:sent-renum($value,$display)))"/>
+                    <!-- for ref tier, output the filename dot (paragraph number dot) sentence number -->
+                    <!-- v1.24: if format is 'flat' then just count the sentences through the whole text -->
+                    <xsl:choose>
+                        <xsl:when test="$display='ref'">
+                            <xsl:choose>
+                                <xsl:when test="$segnum-format='para'">
+                                    <xsl:value-of select="concat($prefix, my:cleanup-brackets(my:sent-renum($value)))"/>
+                                </xsl:when>
+                                <xsl:when test="$segnum-format='both'">
+                                    <xsl:value-of select="concat($prefix, format-number(position(),'#000'), ' (', my:cleanup-brackets(my:sent-renum($value)), ')' )"/>
+                                </xsl:when>
+                                <!-- 'flat' is applied otherwise -->
+                                <xsl:otherwise>
+                                    <xsl:value-of select="concat($prefix, format-number(position(),'#000'))"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat($prefix, my:cleanup-brackets($value))"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </event>
             </xsl:for-each>
         </tier>
@@ -310,6 +352,34 @@
     </xsl:template>
 
 
+    <!-- WORD-LEVEL TIERS (PS) -->
+    <xsl:template name="tier-word">
+        <!-- for exmaralda -->
+        <xsl:param name="cat" select="'v'"/>
+        <xsl:param name="type" select="'a'"/>
+        <xsl:param name="display"/>
+        <xsl:param name="speaker" select="'SPK'"/>
+        <xsl:param name="lang" select="''"/>
+        <xsl:param name="itemtype"/>
+        <tier id="{$display}" speaker="{$speaker}" category="{$cat}" type="{$type}"
+            display-name="{$display}">
+            <xsl:for-each select=".//phrase">
+                <xsl:variable name="ts-start" select="count(./preceding::word[my:word(.)])"/>
+                <!-- +position()-1 -->
+                <xsl:for-each-group select=".//word"
+                    group-starting-with="word[my:startwordgroup(.)]">
+                    <!-- WHEN SENTENCE STARTS WITH PUNCTUATION, IT IS STICKED TO THE FIRST WORD -->
+                    <event start="{concat('T',$ts-start+position()-1)}"
+                        end="{concat('T',$ts-start+position())}">
+                        <xsl:value-of select="current-group()/item[@type = $itemtype and @lang=$lang]" separator=""
+                        />
+                    </event>
+                </xsl:for-each-group>
+            </xsl:for-each>
+        </tier>
+    </xsl:template>
+    
+
     <!-- MORPH/GLOSS LEVELS -->
     <xsl:template name="tier-morph">
         <!-- from flextext -->
@@ -390,16 +460,12 @@
     <!-- convert to a number and pad with zeroes to 3 digits -->
     <xsl:function name="my:sent-renum" as="xs:string">
         <xsl:param name="in" as="xs:string"/>
-        <xsl:param name="tier" as="xs:string"/>
         <xsl:choose>
-            <xsl:when test="$tier='ref' and substring-after($in, '.')!=''">
+            <xsl:when test="substring-after($in, '.')!=''">
                 <xsl:value-of select="concat(format-number(number(substring-before($in,'.')),'#000'),'.',format-number(number(substring-after($in,'.')),'#000'))"/>
             </xsl:when>
-            <xsl:when test="$tier='ref' and substring-after($in, '.')=''">
-                <xsl:value-of select="format-number(number($in),'#000')"/>
-            </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$in"/>
+                <xsl:value-of select="format-number(number($in),'#000')"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -632,6 +698,71 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Charis SIL</property>
             </tier-format>
+            <tier-format tierref="BOR">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="BOR-Typ">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="BOR-Phon">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="BOR-Morph">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="CS">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
             <tier-format tierref="#">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
@@ -671,7 +802,7 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Charis SIL</property>
             </tier-format>
-            <tier-format tierref="frp">
+            <tier-format tierref="fr_ed">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
