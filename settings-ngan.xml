@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conversion-settings>
+    <project-name value="Nganasan"/>
+    <speaker-code position="1"/>
+    <text-name from-item="title" from-lang="en"/>
+    <tiers>
+        <baseline lang="nio-x-lat"/>
+        <!-- Tier parameters -->
+        <!-- name: used as tier name in EXMARaLDA ('display'), also as 'cat' -->
+        <!-- template: template to call for creating this tier -->
+        <!-- itemtype: item/@type in flextext, passed as template param; default='txt' -->
+        <!-- lang: item/@lang in flextext, passed as template param; default=baseline -->
+        <!-- Sentence tiers -->
+        <tier name="ref" template="tier-sent" itemtype="segnum" lang="en" cleanup="renum"/>
+        <tier name="st" template="tier-sent" itemtype="lit" lang="nio-x-cyr" cleanup="brackets"/>
+        <tier name="ts" template="tier-sent-join" cleanup="brackets"/>
+        <tier name="tx" template="tier-tx" itemtype="txt" cleanup="tx"/>
+        <tier name="mb" template="tier-morph" sep="" cleanup="morph"/>
+        <tier name="mp" template="tier-morph" itemtype="cf" sep="" cleanup="morph"/>
+        <tier name="ge" template="tier-morph" itemtype="gls" lang="en" sep="-" cleanup="gloss"/>
+        <tier name="gr" template="tier-morph" itemtype="gls" lang="ru" sep="-" cleanup="gloss"/>
+        <tier name="hn" template="tier-morph" itemtype="hn" lang="en" sep="-" cleanup="none"/>
+        <tier name="mc" template="tier-morph" itemtype="msa" lang="en" sep="-" cleanup="none"/>
+        <tier name="ps" template="tier-word" itemtype="pos" lang="en" cleanup="none"/>
+        <tier name="SeR" template="tier-word-new" />
+        <tier name="SyF" template="tier-word-new" />
+        <tier name="IST" template="tier-word-new" />
+        <tier name="BOR" template="tier-word-new" />
+        <tier name="BOR-Typ" template="tier-word-new" />
+        <tier name="BOR-Phon" template="tier-word-new" />
+        <tier name="BOR-Morph" template="tier-word-new" />
+        <tier name="CS" template="tier-word-new" />
+        <tier name="fr" template="tier-sent" itemtype="gls" lang="ru" cleanup="brackets"/>
+        <tier name="fr_ed" template="tier-sent" itemtype="gls" lang="ru-Qaaa-x-Ourg" cleanup="brackets"/>
+        <tier name="fe" template="tier-sent" itemtype="gls" lang="en" cleanup="brackets"/>
+        <tier name="nt" template="tier-sent" itemtype="note" lang="ru-Qaaa-x-Ourg" cleanup="brackets"/>
+    </tiers>
+</conversion-settings>
