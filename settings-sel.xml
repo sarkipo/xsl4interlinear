@@ -23,7 +23,7 @@
     <speaker-code position="1"/>
     <timeline start="4.0" step="0.5"/>
     <text-name from-item="title-abbreviation" from-lang="en"/>
-    <sentence-number format="flat"/>
+    <sentence-number format="both"/>
     <tiers>
         <!-- baseline: set @lang to writing system code of the baseline text -->
         <baseline lang="sel"/>
@@ -51,11 +51,16 @@
         <tier name="SeR" template="tier-word-new" />
         <tier name="SyF" template="tier-word-new" />
         <tier name="IST" template="tier-word-new" />
+        <tier name="BOR" template="tier-word-new" />
+        <tier name="BOR-Typ" template="tier-word-new" />
+        <tier name="BOR-Phon" template="tier-word-new" />
+        <tier name="BOR-Morph" template="tier-word-new" />
+        <tier name="CS" template="tier-word-new" />
         <tier name="fr" template="tier-sent" itemtype="gls" lang="ru" cleanup="brackets"/>
         <tier name="fe" template="tier-sent" itemtype="gls" lang="en" cleanup="brackets"/>
         <tier name="fg" template="tier-sent" itemtype="gls" lang="de" cleanup="brackets"/>
-        <tier name="ltr" template="tier-sent" itemtype="lit" lang="ru" cleanup="brackets"/>
-        <tier name="lto" template="tier-sent" itemtype="gls" lang="sel-Cyrl-x-source" cleanup="brackets"/>
+        <!--<tier name="ltr" template="tier-sent" itemtype="lit" lang="ru" cleanup="brackets"/>-->
+        <tier name="ltr" template="tier-sent" itemtype="gls" lang="sel-Cyrl-x-source" cleanup="brackets"/><!-- Kuzmina's literal Russian - when it's in Sel-SC line -->
         <tier name="nt" template="tier-sent" itemtype="note" lang="en" cleanup="brackets"/>
         <tier name="nto" template="tier-sent" itemtype="note" lang="sel-Cyrl-x-source" cleanup="brackets"/>
     </tiers>
