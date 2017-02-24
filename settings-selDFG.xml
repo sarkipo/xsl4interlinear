@@ -20,13 +20,13 @@
                     both: flat numbering followed by para.sent numbering in brackets 
     -->
     <project-name value="Selkup"/>
-    <speaker-code position="1"/>
+    <speaker-code position="2"/>
     <timeline start="4.0" step="0.5"/>
-    <text-name from-item="title-abbreviation" from-lang="en"/>
-    <sentence-number format="both"/>
+    <text-name from-item="title" from-lang="en"/>
+    <sentence-number format="flat"/>
     <tiers>
         <!-- baseline: set @lang to writing system code of the baseline text -->
-        <baseline lang="sel"/>
+        <baseline lang="qaa-x-aaa"/>
         <!-- Tier parameters -->
         <!-- @name: used as tier name in EXMARaLDA ('display'), also as 'cat' -->
         <!-- @template: template to call for creating this tier -->
@@ -45,22 +45,17 @@
         <tier name="mp" template="tier-morph" itemtype="cf" sep="" cleanup="morph"/>
         <tier name="ge" template="tier-morph" itemtype="gls" lang="en" sep="-" cleanup="gloss"/>
         <tier name="gr" template="tier-morph" itemtype="gls" lang="ru" sep="-" cleanup="gloss"/>
-        <tier name="mc" template="tier-morph" itemtype="msa" lang="en" sep="-" cleanup="none"/>
         <tier name="hn" template="tier-morph" itemtype="hn" lang="en" sep="-" cleanup="none"/>
+        <tier name="mc" template="tier-morph" itemtype="msa" lang="en" sep="-" cleanup="none"/>
         <tier name="ps" template="tier-word" itemtype="pos" lang="en" cleanup="none"/>
         <tier name="SeR" template="tier-word-new" />
         <tier name="SyF" template="tier-word-new" />
         <tier name="IST" template="tier-word-new" />
-        <tier name="BOR" template="tier-word-new" />
-        <tier name="BOR-Typ" template="tier-word-new" />
-        <tier name="BOR-Phon" template="tier-word-new" />
-        <tier name="BOR-Morph" template="tier-word-new" />
-        <tier name="CS" template="tier-word-new" />
         <tier name="fr" template="tier-sent" itemtype="gls" lang="ru" cleanup="brackets"/>
         <tier name="fe" template="tier-sent" itemtype="gls" lang="en" cleanup="brackets"/>
         <tier name="fg" template="tier-sent" itemtype="gls" lang="de" cleanup="brackets"/>
-        <tier name="ltr" template="tier-sent" itemtype="lit" lang="ru" cleanup="brackets"/><!-- Kuzmina's literal Russian - when it's in Lit/Rus line -->
-        <!--<tier name="ltr" template="tier-sent" itemtype="gls" lang="sel-Cyrl-x-source" cleanup="brackets"/>--><!-- Kuzmina's literal Russian - when it's in Free/Sel-SC line -->
+        <tier name="ltr" template="tier-sent" itemtype="lit" lang="ru" cleanup="brackets"/>
+        <tier name="lto" template="tier-sent" itemtype="gls" lang="sel-Cyrl-x-source" cleanup="brackets"/>
         <tier name="nt" template="tier-sent" itemtype="note" lang="en" cleanup="brackets"/>
         <tier name="nto" template="tier-sent" itemtype="note" lang="sel-Cyrl-x-source" cleanup="brackets"/>
     </tiers>
