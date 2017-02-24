@@ -26,10 +26,10 @@
             v1.10: add so tier; if ft present in source, import it as fe
     -->
 
-    <xsl:variable name="tiers-sent">st so ref ts fr fe ft nt no nv na</xsl:variable>
-    <xsl:variable name="tiers-word">tx</xsl:variable>
-    <xsl:variable name="tiers-morph-top">md mb mp</xsl:variable>
-    <xsl:variable name="tiers-morph-ref">gr ge go ps</xsl:variable>
+    <xsl:variable name="tiers-sent">ref ft_r ft_e</xsl:variable>
+    <xsl:variable name="tiers-word">tx_lat_for_toolbox</xsl:variable>
+    <xsl:variable name="tiers-morph-top">mb</xsl:variable>
+    <xsl:variable name="tiers-morph-ref">gr ge ps</xsl:variable>
 
     <xsl:variable name="filename" select="substring-before(replace(document-uri(.),'^.+/',''),'.')"/>
 
@@ -41,7 +41,7 @@
         <basic-transcription>
             <head>
                 <meta-information>
-                    <project-name>Nganasan</project-name>
+                    <project-name>InfoStructure</project-name>
                     <transcription-name>
                         <xsl:value-of select="$filename"/>
                     </transcription-name>
@@ -70,13 +70,11 @@
 
                 <!-- Here go the tiers. The output order is fixed. -->
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ref')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'st')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'so')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ts')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'tx')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'tx_lat_for_toolbox')]"/>
 
-                <!-- v1.07: renaming md,mb is only performed if not yet done in source (checks if exists 'mp' tier) -->
-                <xsl:choose>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mb')]"/>
+                    <!-- v1.07: renaming md,mb is only performed if not yet done in source (checks if exists 'mp' tier) -->
+                <!--<xsl:choose>
                     <xsl:when test="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mp')]">
                         <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mb')]"/>
                         <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mp')]"/>
@@ -89,28 +87,16 @@
                             <xsl:with-param name="rename" select="'yes'"/>
                         </xsl:apply-templates>
                     </xsl:otherwise>
-                </xsl:choose>
+                </xsl:choose>-->
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'gr')]"/>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ge')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'go')]"/>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ps')]">
-                    <!-- v1.04: adding empty word-level tiers # and IST -->
-                    <xsl:with-param name="addtier" select="'# IST'"/>
+                    <!-- v1.04: adding empty word-level tiers -->
+                <xsl:with-param name="addtier" select="'IST Top Foc'"/>
                 </xsl:apply-templates>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fr')]">
-                    <xsl:with-param name="addtier"
-                        select="if(/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fe') or starts-with(@TIER_ID,'ft')]) then '' else 'fe'"/>
-                    <!-- v1.04: adding empty copy for English translation -->
-                    <!-- v1.08-1.09: ...only if fe or ft not present in the source -->
-                </xsl:apply-templates>
-                <!-- v1.08: added fe -->
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'fe')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ft')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'nt')]"/>
-                <!-- v1.08: added no, nv, na -->
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'no')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'nv')]"/>
-                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'na')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ft_r')]"/>
+                <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ft_e')]"/>
+                
             </basic-body>
             <!-- v1.06: insert the tierformat-table (copied a formatting template) -->
             <xsl:copy-of select="$format-table"/>
@@ -351,7 +337,7 @@
             </xsl:for-each-group>
         </xsl:variable>
         <xsl:variable name="ts-supplemental">
-            <xsl:for-each-group select="/*/TIER[starts-with(@TIER_ID,'tx')]/*" group-by="REF_ANNOTATION/@ANNOTATION_REF">
+            <xsl:for-each-group select="/*/TIER[starts-with(@TIER_ID,'tx_lat_for_toolbox')]/*" group-by="REF_ANNOTATION/@ANNOTATION_REF">
                 <xsl:variable name="aligned-ann" select="key('annot',my:find-aligned-ann(current-group()[1]))"/>
                 <!-- The aligned annotation which dominates the current one, i.e. the sentence annotation  -->
                 <xsl:variable name="sent-start" select="$aligned-ann/*/@TIME_SLOT_REF1"/>
@@ -507,7 +493,7 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Charis SIL</property>
             </tier-format>
-            <tier-format tierref="tx">
+            <tier-format tierref="tx_lat_for_toolbox">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
@@ -637,7 +623,33 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Times New Roman</property>
             </tier-format>
-            <tier-format tierref="fr">
+            <tier-format tierref="Top">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Times New Roman</property>
+            </tier-format>
+            <tier-format tierref="Foc">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Times New Roman</property>
+            </tier-format>
+            <tier-format tierref="ft_r">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
@@ -650,7 +662,7 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Charis SIL</property>
             </tier-format>
-            <tier-format tierref="fe">
+            <tier-format tierref="ft_e">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
