@@ -73,26 +73,12 @@
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'tx_lat_for_toolbox')]"/>
 
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mb')]"/>
-                    <!-- v1.07: renaming md,mb is only performed if not yet done in source (checks if exists 'mp' tier) -->
-                <!--<xsl:choose>
-                    <xsl:when test="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mp')]">
-                        <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mb')]"/>
-                        <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mp')]"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'md')]">
-                            <xsl:with-param name="rename" select="'yes'"/>
-                        </xsl:apply-templates>
-                        <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'mb')]">
-                            <xsl:with-param name="rename" select="'yes'"/>
-                        </xsl:apply-templates>
-                    </xsl:otherwise>
-                </xsl:choose>-->
+              
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'gr')]"/>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ge')]"/>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ps')]">
                     <!-- v1.04: adding empty word-level tiers -->
-                <xsl:with-param name="addtier" select="'IST Top Foc'"/>
+                <xsl:with-param name="addtier" select="'SeR SyF IST Top Foc'"/>
                 </xsl:apply-templates>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ft_r')]"/>
                 <xsl:apply-templates select="/ANNOTATION_DOCUMENT/TIER[starts-with(@TIER_ID,'ft_e')]"/>
@@ -610,6 +596,32 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Times New Roman</property>
             </tier-format>
+            <tier-format tierref="SeR">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="SyF">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
             <tier-format tierref="IST">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
@@ -621,7 +633,7 @@
                 <property name="chunk-border-color">#R00G00B00</property>
                 <property name="chunk-border"/>
                 <property name="font-size">12</property>
-                <property name="font-name">Times New Roman</property>
+                <property name="font-name">Charis SIL</property>
             </tier-format>
             <tier-format tierref="Top">
                 <property name="row-height-calculation">Generous</property>

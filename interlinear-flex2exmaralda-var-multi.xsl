@@ -14,6 +14,7 @@
             This transform is for a single file containing multiple texts. 
             Based on transform for Nganasan.
             Based on the batch version based on interlinear-eaf2exmaralda.xsl v1.11.
+            v2.03: Time attributes (per phrase) are imported if there are any
             v2.02: Added sentence-numbering options (flat, para, both); moved all parameters to settings file; added couple of tier styles
             v2.01: Added lang attribute to tier-word template (23.11.2016)
             v2.00: Many parameters related to specific tiers etc. are now read from a settings file.
@@ -66,7 +67,9 @@
                         substring-before(substring-after($textname, '_'), '_')
                     else
                         substring-before($textname, '_')"/>
-
+        <!-- v2.03: checks whether time attributes are present -->
+        <xsl:variable name="hastime" as="xs:boolean" select="if (.//phrase/@begin-time-offset) then true() else false()"/>
+        
         <interlinear-text name="{$textname}"/>
         <xsl:result-document method="xml" indent="yes" encoding="utf-8" omit-xml-declaration="no"
             href="{concat($textname,'.exb')}">
@@ -105,14 +108,32 @@
                             <xsl:variable name="tsnumber"
                                 select="count(./preceding::word[my:word(.)])"/>
                             <!-- +position()-1 -->
-                            <tli id="{concat('T',$tsnumber)}"
-                                time="{format-number($timestart + $timestep*$tsnumber, '#0.0##')}"
-                                type="appl"/>
-                            <xsl:for-each select="current()//word[my:word(.)]">
-                                <tli id="{concat('T',$tsnumber+position())}"
-                                    time="{format-number($timestart + $timestep*($tsnumber+position()),'#0.0##')}"
-                                    type="appl"/>
-                            </xsl:for-each>
+                            <!-- v2.03: imports time attributes if there are any -->
+                            <xsl:choose>
+                                <xsl:when test="$hastime">
+                                    <xsl:variable name="phrasestart" select="(./@begin-time-offset) div 1000"/>
+                                    <xsl:variable name="phraseend" select="(./@end-time-offset) div 1000"/>
+                                    <xsl:variable name="phrasestep" select="($phraseend - $phrasestart) div count(.//word[my:word(.)])"/>
+                                    <tli id="{concat('T',$tsnumber)}"
+                                        time="{format-number($phrasestart, '#0.0##')}"
+                                        type="appl"/>
+                                    <xsl:for-each select="current()//word[my:word(.)]">
+                                        <tli id="{concat('T',$tsnumber+position())}"
+                                            time="{format-number($phrasestart + $phrasestep*(position()),'#0.0##')}"
+                                            type="appl"/>
+                                    </xsl:for-each>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <tli id="{concat('T',$tsnumber)}"
+                                        time="{format-number($timestart + $timestep*$tsnumber, '#0.0##')}"
+                                        type="appl"/>
+                                    <xsl:for-each select="current()//word[my:word(.)]">
+                                        <tli id="{concat('T',$tsnumber+position())}"
+                                            time="{format-number($timestart + $timestep*($tsnumber+position()),'#0.0##')}"
+                                            type="appl"/>
+                                    </xsl:for-each>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:for-each>
                     </common-timeline>
 
