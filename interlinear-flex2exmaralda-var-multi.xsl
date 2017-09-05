@@ -229,7 +229,7 @@
         <xsl:param name="lang" select="''"/>
         <!-- for exmaralda -->
         <xsl:param name="cat" select="'v'"/>
-        <xsl:param name="type" select="'d'"/>
+        <xsl:param name="type" select="'a'"/>
         <xsl:param name="display"/>
         <!-- to append filename in ref tier -->
         <xsl:param name="prefix" select="''"/>
@@ -280,7 +280,7 @@
         <xsl:param name="lang" select="''"/>
         <!-- for exmaralda -->
         <xsl:param name="cat" select="'v'"/>
-        <xsl:param name="type" select="'d'"/>
+        <xsl:param name="type" select="'a'"/>
         <xsl:param name="display"/>
         <xsl:param name="speaker" select="'SPK'"/>
         <tier id="{$display}" speaker="{$speaker}" category="{$cat}" type="{$type}"
