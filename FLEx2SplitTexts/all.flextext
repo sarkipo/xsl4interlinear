@@ -1,0 +1,1283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document version="2">
+  <interlinear-text guid="3493593d-6363-42fe-ac85-b0a3f6237ded">
+    <item type="title" lang="en">Bread</item>
+    <item type="title-abbreviation" lang="en">KPG_1969_Bread_nar</item>
+    <item type="source" lang="en">Speaker: Kunina Polina Gavrilovna \nLanguage: Selkup \nDialect: Tol'ka (on Pur) \nRecorded in 1969 by A. Kuz'mina \nKuzmina Archive KA V05:B10:176-178 \nGlossed by BrM \nRussian translation by BrM \nEnglish translation by BJ \nGerman translation by </item>
+    <paragraphs>
+      <paragraph guid="cc31b9e8-a10f-490b-a351-d389b90dcc36">
+        <phrases>
+          <phrase guid="db7a3f34-37eb-4cd9-86bd-dd0fa748d633">
+            <item type="segnum" lang="en">1.1</item>
+            <words>
+              <word guid="953ef15d-cf93-46d8-abe4-5c13ce1d8f87">
+                <item type="txt" lang="sel">Nʼäːnʼim</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">nʼäːnʼ</item>
+                    <item type="cf" lang="sel">nʼanʼ</item>
+                    <item type="variantTypes" lang="en">+Kuz. var. of</item>
+                    <item type="gls" lang="en">bread</item>
+                    <item type="gls" lang="ru">хлеб</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-i</item>
+                    <item type="cf" lang="sel">-ɨ</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="gls" lang="en">EP</item>
+                    <item type="gls" lang="ru">EP</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:(ins)</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-m</item>
+                    <item type="cf" lang="sel">-m</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">ACC</item>
+                    <item type="gls" lang="ru">ACC</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="21292f4c-8d72-41d7-bd72-c026d8376fbd">
+                <item type="txt" lang="sel">meːtɔːmɨn</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">meː</item>
+                    <item type="cf" lang="sel">meː</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">make</item>
+                    <item type="gls" lang="ru">сделать</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɔː</item>
+                    <item type="cf" lang="sel">-tɨ</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="gls" lang="en">TR</item>
+                    <item type="gls" lang="ru">TR</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v&gt;v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-mɨn</item>
+                    <item type="cf" lang="sel">-mɨt</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">1PL</item>
+                    <item type="gls" lang="ru">1PL</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word guid="db7bb9df-c47e-407a-96ff-c8613490aad6">
+                <item type="txt" lang="sel">šoːqorqɨn</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">šoːqor</item>
+                    <item type="cf" lang="sel">šoːqɨr</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">oven</item>
+                    <item type="gls" lang="ru">печь</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-qɨn</item>
+                    <item type="cf" lang="sel">-qɨn</item>
+                    <item type="hn" lang="sel">3</item>
+                    <item type="gls" lang="en">LOC</item>
+                    <item type="gls" lang="ru">LOC</item>
+                    <item type="gls" lang="en-x-ref" />
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="29ed6a48-0f19-4cd5-825e-20a80e2729a9">
+                <item type="txt" lang="sel">sölʼ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">sö</item>
+                    <item type="cf" lang="sel">sö</item>
+                    <item type="gls" lang="en">clay</item>
+                    <item type="gls" lang="ru">глина</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-lʼ</item>
+                    <item type="cf" lang="sel">-lʼ</item>
+                    <item type="gls" lang="en">ADJZ</item>
+                    <item type="gls" lang="ru">ADJZ</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n&gt;adj</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">adj</item>
+              </word>
+              <word guid="db7bb9df-c47e-407a-96ff-c8613490aad6">
+                <item type="txt" lang="sel">šoːqorqɨn</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">šoːqor</item>
+                    <item type="cf" lang="sel">šoːqɨr</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">oven</item>
+                    <item type="gls" lang="ru">печь</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-qɨn</item>
+                    <item type="cf" lang="sel">-qɨn</item>
+                    <item type="hn" lang="sel">3</item>
+                    <item type="gls" lang="en">LOC</item>
+                    <item type="gls" lang="ru">LOC</item>
+                    <item type="gls" lang="en-x-ref" />
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">Хлеб делаем в печи, в глиняной печке.</item>
+            <item type="gls" lang="en">We made bread in an oven, a clay oven.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">nʼäːnʼim meːtoːmɨn šoːqorqɨn səlʼ šoːqorqɨn.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">′нʼӓ̄н̄ʼим ′ме̄′то̄мын ′ш̄о̄ɣорkын съ̊lʼ ′шо̄ɣорkын.</item>
+            <item type="note" lang="en" />
+            <item type="note" lang="en" />
+          </phrase>
+          <phrase guid="b95867cd-5e06-49d0-88ed-f53bf3903564">
+            <item type="segnum" lang="en">1.2</item>
+            <words>
+              <word guid="50e97366-ed38-44c3-9fb1-bd144e22266b">
+                <item type="txt" lang="sel">Šoːqorlʼačʼa</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">šoːqor</item>
+                    <item type="cf" lang="sel">šoːqɨr</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">oven</item>
+                    <item type="gls" lang="ru">печь</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-lʼa</item>
+                    <item type="cf" lang="sel">-lʼa</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">DIM</item>
+                    <item type="gls" lang="ru">DIM</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n&gt;n</item>
+                  </morph>
+                  <morph>
+                    <item type="txt" lang="sel">-čʼa</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-^0</item>
+                    <item type="cf" lang="sel">-^0</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">[NOM]</item>
+                    <item type="gls" lang="ru">[NOM]</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="1255f9f4-b904-42f7-a282-09ec0a9a1187">
+                <item type="txt" lang="sel">čʼɔːtɛntal</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">čʼɔːt</item>
+                    <item type="cf" lang="sel">čʼɔːtɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">set.fire</item>
+                    <item type="gls" lang="ru">зажечь</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-ɛnta</item>
+                    <item type="cf" lang="sel">-ɛntɨ</item>
+                    <item type="gls" lang="en">FUT</item>
+                    <item type="gls" lang="ru">FUT</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:tense</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-l</item>
+                    <item type="cf" lang="sel">-l</item>
+                    <item type="gls" lang="en">2SG.O</item>
+                    <item type="gls" lang="ru">2SG.O</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">,</item>
+              </word>
+              <word guid="8566ed14-a25e-47bc-a130-043115e49ca7">
+                <item type="txt" lang="sel">poːsa</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">poː</item>
+                    <item type="cf" lang="sel">poː</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">firewood</item>
+                    <item type="gls" lang="ru">дрова</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-sa</item>
+                    <item type="cf" lang="sel">-sä</item>
+                    <item type="gls" lang="en">INSTR</item>
+                    <item type="gls" lang="ru">INSTR</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="c774cb6f-c511-434e-8674-5cce4d21b299">
+                <item type="txt" lang="sel">pintärtɛntal</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">pin</item>
+                    <item type="cf" lang="sel">pin</item>
+                    <item type="gls" lang="en">put</item>
+                    <item type="gls" lang="ru">положить</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tä</item>
+                    <item type="cf" lang="sel">-tä</item>
+                    <item type="gls" lang="en">%%</item>
+                    <item type="gls" lang="ru">%%</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v&gt;v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-r</item>
+                    <item type="cf" lang="sel">-r</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">FRQ</item>
+                    <item type="gls" lang="ru">FRQ</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v&gt;v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɛnta</item>
+                    <item type="cf" lang="sel">-ɛntɨ</item>
+                    <item type="gls" lang="en">FUT</item>
+                    <item type="gls" lang="ru">FUT</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:tense</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-l</item>
+                    <item type="cf" lang="sel">-l</item>
+                    <item type="gls" lang="en">2SG.O</item>
+                    <item type="gls" lang="ru">2SG.O</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">,</item>
+              </word>
+              <word guid="a37e317f-6eae-46a2-8892-59ff0ec35347">
+                <item type="txt" lang="sel">šʼittɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">šittɨ</item>
+                    <item type="cf" lang="sel">šittɨ</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="gls" lang="en">two</item>
+                    <item type="gls" lang="ru">два</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">num</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">num</item>
+              </word>
+              <word guid="78e5d9d2-95bb-4412-8fab-0345f24f2d03">
+                <item type="txt" lang="sel">pɔːrɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">pɔːrɨ</item>
+                    <item type="cf" lang="sel">pɔːrɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">time</item>
+                    <item type="gls" lang="ru">раз</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-^0</item>
+                    <item type="cf" lang="sel">-^0</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">[NOM]</item>
+                    <item type="gls" lang="ru">[NOM]</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">Печку затопишь, дрова подкладывать будешь, два раза.</item>
+            <item type="gls" lang="en">You light the oven, put the firewood, two times.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">šoqorlʼačʼa čʼoːtentalʼ posa pintärtäntalʼ šittɨ pa[oː]rɨ.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">′шоɣорlа′ча ′чо̄тентаl ′поса пинтӓртӓнтаl шʼитты ′па[о̄]ры.</item>
+            <item type="note" lang="en" />
+          </phrase>
+          <phrase guid="ae7f8a27-936f-4cc2-819b-d948f33348b1">
+            <item type="segnum" lang="en">1.3</item>
+            <words>
+              <word guid="b6e90cc3-73cc-425a-9f79-e246ccc69bd9">
+                <item type="txt" lang="sel">Sıːtʼitɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">sıːtʼi</item>
+                    <item type="cf" lang="sel">sıːčʼɨ</item>
+                    <item type="gls" lang="en">coal</item>
+                    <item type="gls" lang="ru">уголь</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-^0</item>
+                    <item type="cf" lang="sel">-^0</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">[NOM]</item>
+                    <item type="gls" lang="ru">[NOM]</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case1</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɨ</item>
+                    <item type="cf" lang="sel">-tɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">3SG</item>
+                    <item type="gls" lang="ru">3SG</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:poss</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="21707599-77ca-4425-9084-801eff93d6e7">
+                <item type="txt" lang="sel">šittə</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">šittə</item>
+                    <item type="cf" lang="sel">šittɨ</item>
+                    <item type="hn" lang="sel">3</item>
+                    <item type="gls" lang="en">every.which.way</item>
+                    <item type="gls" lang="ru">в.разные.стороны</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">preverb</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">preverb</item>
+              </word>
+              <word guid="e820fc25-7d34-4ca3-9bbc-f5f9113c7a46">
+                <item type="txt" lang="sel">qattaltɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">qatt</item>
+                    <item type="cf" lang="sel">qättɨ</item>
+                    <item type="gls" lang="en">hit</item>
+                    <item type="gls" lang="ru">ударить</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-al</item>
+                    <item type="cf" lang="sel">-ätɔːl</item>
+                    <item type="gls" lang="en">MOM</item>
+                    <item type="gls" lang="ru">MOM</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v&gt;v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɨ</item>
+                    <item type="cf" lang="sel">-ätɨ</item>
+                    <item type="gls" lang="en">IMP.2SG.O</item>
+                    <item type="gls" lang="ru">IMP.2SG.O</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:mood.pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">,</item>
+              </word>
+              <word guid="b24faa5b-10cb-448f-a4dd-c92a350b91ed">
+                <item type="txt" lang="sel">ɔːmɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">ɔːmɨ</item>
+                    <item type="cf" lang="sel">ɔːmɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">other</item>
+                    <item type="gls" lang="ru">остальной</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">adj</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">adj</item>
+              </word>
+              <word guid="b6e90cc3-73cc-425a-9f79-e246ccc69bd9">
+                <item type="txt" lang="sel">sıːtʼitɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">sıːtʼi</item>
+                    <item type="cf" lang="sel">sıːčʼɨ</item>
+                    <item type="gls" lang="en">coal</item>
+                    <item type="gls" lang="ru">уголь</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-^0</item>
+                    <item type="cf" lang="sel">-^0</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">[NOM]</item>
+                    <item type="gls" lang="ru">[NOM]</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case1</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɨ</item>
+                    <item type="cf" lang="sel">-tɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">3SG</item>
+                    <item type="gls" lang="ru">3SG</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:poss</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="27815799-ab54-4e37-bf3d-f7dd4ebee018">
+                <item type="txt" lang="sel">ponä</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">ponä</item>
+                    <item type="cf" lang="sel">ponä</item>
+                    <item type="gls" lang="en">outwards</item>
+                    <item type="gls" lang="ru">наружу</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">adv</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">adv</item>
+              </word>
+              <word guid="e820fc25-7d34-4ca3-9bbc-f5f9113c7a46">
+                <item type="txt" lang="sel">qattaltɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">qatt</item>
+                    <item type="cf" lang="sel">qättɨ</item>
+                    <item type="gls" lang="en">hit</item>
+                    <item type="gls" lang="ru">ударить</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-al</item>
+                    <item type="cf" lang="sel">-ätɔːl</item>
+                    <item type="gls" lang="en">MOM</item>
+                    <item type="gls" lang="ru">MOM</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v&gt;v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɨ</item>
+                    <item type="cf" lang="sel">-ätɨ</item>
+                    <item type="gls" lang="en">IMP.2SG.O</item>
+                    <item type="gls" lang="ru">IMP.2SG.O</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:mood.pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">Угли в стороны разгреби, остальные угли на улицу выгреби.</item>
+            <item type="gls" lang="en">Scrape the coal on the side away, rake the other coal outside.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">sidʼitɨ šittə qattalʼtɨ, omɨ sid̂ʼitɨ pona qattalʼd̂ɨ.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">′сидʼиты шʼиттъ kаттаlты, ′омы ′сид̂ʼиты ′пона ′kаттаlʼд̂ы.</item>
+          </phrase>
+          <phrase guid="3755aa08-3677-4f80-83e2-f98ac893646d">
+            <item type="segnum" lang="en">1.4</item>
+            <words>
+              <word guid="23ba5c49-5da3-477a-87dc-b14431547559">
+                <item type="txt" lang="sel">Nʼajlʼä</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">nʼaj</item>
+                    <item type="cf" lang="sel">nʼanʼ</item>
+                    <item type="variantTypes" lang="en">+dial. var. of</item>
+                    <item type="gls" lang="en">bread</item>
+                    <item type="gls" lang="ru">хлеб</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-lʼä</item>
+                    <item type="cf" lang="sel">-lʼa</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">DIM</item>
+                    <item type="gls" lang="ru">DIM</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n&gt;n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-^0</item>
+                    <item type="cf" lang="sel">-^0</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">[NOM]</item>
+                    <item type="gls" lang="ru">[NOM]</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="82df8d07-4f9f-467b-9634-e87f71cb6fb2">
+                <item type="txt" lang="sel">korpattɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">korpat</item>
+                    <item type="cf" lang="sel">korpɨt</item>
+                    <item type="gls" lang="en">mix</item>
+                    <item type="gls" lang="ru">смешать</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɨ</item>
+                    <item type="cf" lang="sel">-ätɨ</item>
+                    <item type="gls" lang="en">IMP.2SG.O</item>
+                    <item type="gls" lang="ru">IMP.2SG.O</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:mood.pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">,</item>
+              </word>
+              <word guid="b7c21434-0dab-4643-ad1d-a23eb2ee65d5">
+                <item type="txt" lang="sel">štälʼ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">štälʼ</item>
+                    <item type="cf" lang="sel">šittälʼ</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">then</item>
+                    <item type="gls" lang="ru">потом</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">adv</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">adv</item>
+              </word>
+              <word guid="b6d8d4fa-609f-452b-b395-3ad596973eb3">
+                <item type="txt" lang="sel">skavartalʼ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">skavarta</item>
+                    <item type="cf" lang="sel">skavarta</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-lʼ</item>
+                    <item type="cf" lang="sel">-lʼ</item>
+                    <item type="gls" lang="en">ADJZ</item>
+                    <item type="gls" lang="ru">ADJZ</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n&gt;adj</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="9e804c54-25d4-4549-baf6-57874b326607">
+                <item type="txt" lang="sel">ürsä</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">ür</item>
+                    <item type="cf" lang="sel">ür</item>
+                    <item type="gls" lang="en">fat</item>
+                    <item type="gls" lang="ru">жир</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-sä</item>
+                    <item type="cf" lang="sel">-sä</item>
+                    <item type="gls" lang="en">INSTR</item>
+                    <item type="gls" lang="ru">INSTR</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="540f3050-3d28-40c9-a18a-4c27b1d118d3">
+                <item type="txt" lang="sel">natqɨltɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">nat</item>
+                    <item type="cf" lang="sel">nat</item>
+                    <item type="gls" lang="en">anoint</item>
+                    <item type="gls" lang="ru">мазать</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-qɨl</item>
+                    <item type="cf" lang="sel">-qɨl</item>
+                    <item type="gls" lang="en">MULO</item>
+                    <item type="gls" lang="ru">MULO</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v&gt;v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɨ</item>
+                    <item type="cf" lang="sel">-ätɨ</item>
+                    <item type="gls" lang="en">IMP.2SG.O</item>
+                    <item type="gls" lang="ru">IMP.2SG.O</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:mood.pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">Хлеб замешай, сковородку жиром намажь.</item>
+            <item type="gls" lang="en">Knead the bread, then smear the pan with grease.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">nʼajlʼä qorpatɨ, štälʼ skavartalʼ ürsä natqɨlʼtä.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">′нʼайlӓ kорпаты, штӓl скавартаl ′ӱрсӓ ′натkыlтӓ.</item>
+            <item type="note" lang="en" />
+          </phrase>
+          <phrase guid="29dc8076-19f0-4480-ba01-20961708e160">
+            <item type="segnum" lang="en">1.5</item>
+            <words>
+              <word guid="94640f24-7317-4410-8d9e-1c6d1e9eaf8c">
+                <item type="txt" lang="sel">Štälʼlʼe</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">štälʼlʼe</item>
+                    <item type="cf" lang="sel">šittälʼ</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">then</item>
+                    <item type="gls" lang="ru">потом</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">adv</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">adv</item>
+              </word>
+              <word guid="1d016b4b-0f13-4450-8cb8-19e0d9b99ae6">
+                <item type="txt" lang="sel">šoːqortä</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">šoːqor</item>
+                    <item type="cf" lang="sel">šoːqɨr</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">oven</item>
+                    <item type="gls" lang="ru">печь</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tä</item>
+                    <item type="cf" lang="sel">-ntɨ</item>
+                    <item type="hn" lang="sel">5</item>
+                    <item type="gls" lang="en">ILL</item>
+                    <item type="gls" lang="ru">ILL</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="26592d90-6e8d-43cb-9976-247d0bec204d">
+                <item type="txt" lang="sel">tottätə</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">tott</item>
+                    <item type="cf" lang="sel">tottɨ</item>
+                    <item type="gls" lang="en">put</item>
+                    <item type="gls" lang="ru">положить</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-ätə</item>
+                    <item type="cf" lang="sel">-ätɨ</item>
+                    <item type="gls" lang="en">IMP.2SG.O</item>
+                    <item type="gls" lang="ru">IMP.2SG.O</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:mood.pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">Затем в печку поставь.</item>
+            <item type="gls" lang="en">Then put it in the oven.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">štälʼlʼe šoːqortä tottädə.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">′штӓllе шо̄ɣортӓ ′тоттӓдъ.</item>
+            <item type="note" lang="en" />
+          </phrase>
+          <phrase guid="1f4e4e83-f64d-49e9-ab78-4f95b0c955af">
+            <item type="segnum" lang="en">1.6</item>
+            <words>
+              <word guid="1df86cee-61f3-44d9-8c05-a891e84f89cf">
+                <item type="txt" lang="sel">Pillä</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">pi</item>
+                    <item type="cf" lang="sel">pi</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">ripen</item>
+                    <item type="gls" lang="ru">поспеть</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-l</item>
+                    <item type="cf" lang="sel">-lɨ</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="gls" lang="en">RES</item>
+                    <item type="gls" lang="ru">RES</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v&gt;v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-lä</item>
+                    <item type="cf" lang="sel">-lä</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="gls" lang="en">CVB</item>
+                    <item type="gls" lang="ru">CVB</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v&gt;adv</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">adv</item>
+              </word>
+              <word guid="23e9fc5b-3c2b-4c50-8247-a7bbfce7c2f9">
+                <item type="txt" lang="sel">puːla</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">puːla</item>
+                    <item type="cf" lang="sel">puːlä</item>
+                    <item type="gls" lang="en">after</item>
+                    <item type="gls" lang="ru">после</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">conj</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">ptcl</item>
+              </word>
+              <word guid="a2bb90c2-c0bb-46c9-ba0d-0bb05ff40390">
+                <item type="txt" lang="sel">konnä</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">konnä</item>
+                    <item type="cf" lang="sel">konnä</item>
+                    <item type="gls" lang="en">upwards</item>
+                    <item type="gls" lang="ru">вверх</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">adv</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">adv</item>
+              </word>
+              <word guid="a773d981-3863-4dd9-b417-f4a7740adf29">
+                <item type="txt" lang="sel">iːqɨltɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">iː</item>
+                    <item type="cf" lang="sel">iː</item>
+                    <item type="gls" lang="en">take</item>
+                    <item type="gls" lang="ru">взять</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-qɨl</item>
+                    <item type="cf" lang="sel">-qɨl</item>
+                    <item type="gls" lang="en">MULO</item>
+                    <item type="gls" lang="ru">MULO</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v&gt;v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɨ</item>
+                    <item type="cf" lang="sel">-ätɨ</item>
+                    <item type="gls" lang="en">IMP.2SG.O</item>
+                    <item type="gls" lang="ru">IMP.2SG.O</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:mood.pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">После того как испечется, вытащи.</item>
+            <item type="gls" lang="en">After it is ready, take it out.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">pilʼlʼa puːlʼa qonnä iːqɨlʼtɨ.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">′пиllа ′пӯlа ′kоннӓ ′ӣkылʼты.</item>
+          </phrase>
+        </phrases>
+      </paragraph>
+    </paragraphs>
+    <languages>
+      <language lang="en" font="Times New Roman" />
+      <language lang="sel" font="Charis SIL" vernacular="true" />
+      <language lang="ru" font="Charis SIL" />
+      <language lang="en-x-ref" font="Times New Roman" />
+      <language lang="de" font="Charis SIL" />
+      <language lang="sel-Latn-x-source" font="Charis SIL" />
+      <language lang="sel-Cyrl-x-source" font="Charis SIL" />
+    </languages>
+  </interlinear-text>
+  <interlinear-text guid="3fcb8a24-dd90-4321-9d07-fe1f0b2631bd">
+    <item type="title" lang="en">Funeral</item>
+    <item type="title-abbreviation" lang="en">SMI_1965_Funeral_nar</item>
+    <item type="source" lang="en">Speaker: Sargaeva Marija Il'jinichna \nLanguage: Selkup \nDialect: Taz  \nRecorded in 1965 by A. Kuz'mina \nKuzmina Archive KA V01:B19:392 \nGlossed by BrM \nRussian translation by BrM \nEnglish translation by BJ \nGerman translation by</item>
+    <paragraphs>
+      <paragraph guid="bdb2f8a8-8440-4b36-812e-cd3166b824b8">
+        <phrases>
+          <phrase guid="a2a50762-57b6-4779-9ab5-42cdb7863db7">
+            <item type="segnum" lang="en">1.1</item>
+            <words>
+              <word guid="03c774bc-bc4f-4289-b77b-1d70098b3659">
+                <item type="txt" lang="sel">Mej</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">mej</item>
+                    <item type="cf" lang="sel">meː</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="variantTypes" lang="en">+Kuz. var. of</item>
+                    <item type="gls" lang="en">we.DU.NOM</item>
+                    <item type="gls" lang="ru">мы.DU.NOM</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">pers</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">pers</item>
+              </word>
+              <word guid="7676f4b2-da82-4d65-b8ad-8f2e999b7655">
+                <item type="txt" lang="sel">qumɨt</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">qum</item>
+                    <item type="cf" lang="sel">qum</item>
+                    <item type="gls" lang="en">human.being</item>
+                    <item type="gls" lang="ru">человек</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-ɨ</item>
+                    <item type="cf" lang="sel">-ɨ</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="gls" lang="en">EP</item>
+                    <item type="gls" lang="ru">EP</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:(ins)</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-t</item>
+                    <item type="cf" lang="sel">-n</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">GEN</item>
+                    <item type="gls" lang="ru">GEN</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="9a2ad2c8-88ec-4bf2-bf12-cd5d489b9c2f">
+                <item type="txt" lang="sel">poːp</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">poː</item>
+                    <item type="cf" lang="sel">poː</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">tree</item>
+                    <item type="gls" lang="ru">дерево</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-p</item>
+                    <item type="cf" lang="sel">-m</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">ACC</item>
+                    <item type="gls" lang="ru">ACC</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="f3e3b2fc-2cd4-47b1-856c-5f0213a79c11">
+                <item type="txt" lang="sel">meːsɔːmɨn</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">meː</item>
+                    <item type="cf" lang="sel">meː</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">make</item>
+                    <item type="gls" lang="ru">сделать</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-sɔː</item>
+                    <item type="cf" lang="sel">-sɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">PST</item>
+                    <item type="gls" lang="ru">PST</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:tense</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-mɨn</item>
+                    <item type="cf" lang="sel">-mɨt</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">1PL</item>
+                    <item type="gls" lang="ru">1PL</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">Мы гроб делали.</item>
+            <item type="gls" lang="en">We made a coffin.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">Мej qumɨtpop mesamɨn.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">Мей ′kумытпоп ′месамын.</item>
+            <item type="note" lang="en" />
+          </phrase>
+          <phrase guid="889f703c-38e4-40b4-954c-f7cb2e58d2d6">
+            <item type="segnum" lang="en">1.2</item>
+            <words>
+              <word guid="25ca901d-33ff-4e19-8b48-861c43dfeca1">
+                <item type="txt" lang="sel">Aj</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">aj</item>
+                    <item type="cf" lang="sel">aj</item>
+                    <item type="gls" lang="en">and</item>
+                    <item type="gls" lang="ru">и</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">conj</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">conj</item>
+              </word>
+              <word guid="b6a4d51c-ae7e-4857-ab7e-9005c65f634a">
+                <item type="txt" lang="sel">pissɨmɨt</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">pis</item>
+                    <item type="cf" lang="sel">pin</item>
+                    <item type="gls" lang="en">put</item>
+                    <item type="gls" lang="ru">положить</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-sɨ</item>
+                    <item type="cf" lang="sel">-sɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">PST</item>
+                    <item type="gls" lang="ru">PST</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:tense</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-mɨt</item>
+                    <item type="cf" lang="sel">-mɨt</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="gls" lang="en">1PL</item>
+                    <item type="gls" lang="ru">1PL</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word guid="e3a38425-78b0-4d45-9995-ef8f2012a388">
+                <item type="txt" lang="sel">poːntɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">poː</item>
+                    <item type="cf" lang="sel">poː</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">tree</item>
+                    <item type="gls" lang="ru">дерево</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-ntɨ</item>
+                    <item type="cf" lang="sel">-ntɨ</item>
+                    <item type="hn" lang="sel">5</item>
+                    <item type="gls" lang="en">ILL</item>
+                    <item type="gls" lang="ru">ILL</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case3</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">И положили в гроб.</item>
+            <item type="gls" lang="en">And put him in the coffin.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">äj pissemɨt pontə.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">ӓй ′писсемыт ′понтъ.</item>
+            <item type="note" lang="en" />
+          </phrase>
+          <phrase guid="489f8a3f-9d9b-4bf1-a798-3823aa47b6b1">
+            <item type="segnum" lang="en">1.3</item>
+            <words>
+              <word guid="30b989d0-bdec-4464-8f32-5585a4f7686d">
+                <item type="txt" lang="sel">Nɨnɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">nɨnɨ</item>
+                    <item type="cf" lang="sel">nɨːnɨ</item>
+                    <item type="gls" lang="en">then</item>
+                    <item type="gls" lang="ru">потом</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">adv</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">adv</item>
+              </word>
+              <word guid="3ea3451e-2437-4ba9-8a20-f6180beaafe7">
+                <item type="txt" lang="sel">qɨltɨ</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">qɨl</item>
+                    <item type="cf" lang="sel">qɨl</item>
+                    <item type="gls" lang="en">hole</item>
+                    <item type="gls" lang="ru">яма</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-^0</item>
+                    <item type="cf" lang="sel">-^0</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">[NOM]</item>
+                    <item type="gls" lang="ru">[NOM]</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:case1</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-tɨ</item>
+                    <item type="cf" lang="sel">-tɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">3SG</item>
+                    <item type="gls" lang="ru">3SG</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">n:poss</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="f3e3b2fc-2cd4-47b1-856c-5f0213a79c11">
+                <item type="txt" lang="sel">meːsɔːmɨn</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">meː</item>
+                    <item type="cf" lang="sel">meː</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">make</item>
+                    <item type="gls" lang="ru">сделать</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-sɔː</item>
+                    <item type="cf" lang="sel">-sɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">PST</item>
+                    <item type="gls" lang="ru">PST</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:tense</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-mɨn</item>
+                    <item type="cf" lang="sel">-mɨt</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">1PL</item>
+                    <item type="gls" lang="ru">1PL</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">Потом мы ямы копали.</item>
+            <item type="gls" lang="en">Then we made a hole.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">nɨnɨ qɨlʼtä meːsamɨn.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">′ныны ′kыlтӓ ′ме̄самын.</item>
+            <item type="note" lang="en" />
+          </phrase>
+          <phrase guid="e5b82b3d-b64d-4064-80f7-5a05fda05fe1">
+            <item type="segnum" lang="en">1.4</item>
+            <words>
+              <word guid="943ba7f2-a618-4a3e-8803-73b1e71ead69">
+                <item type="txt" lang="sel">İllä</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">i̇llä</item>
+                    <item type="cf" lang="sel">ıllä</item>
+                    <item type="variantTypes" lang="en">+Kuz. var. of</item>
+                    <item type="gls" lang="en">down</item>
+                    <item type="gls" lang="ru">вниз</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">adv</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">adv</item>
+              </word>
+              <word guid="d167ec53-98b2-49a5-ad8f-c2015736e28e">
+                <item type="txt" lang="sel">üːtɨsɔːmɨn</item>
+                <morphemes>
+                  <morph type="stem" guid="d7f713e8-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">üːtɨ</item>
+                    <item type="cf" lang="sel">üːtɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">let.go</item>
+                    <item type="gls" lang="ru">пустить</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-sɔː</item>
+                    <item type="cf" lang="sel">-sɨ</item>
+                    <item type="hn" lang="sel">1</item>
+                    <item type="gls" lang="en">PST</item>
+                    <item type="gls" lang="ru">PST</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:tense</item>
+                  </morph>
+                  <morph type="suffix" guid="d7f713dd-e8cf-11d3-9764-00c04f186933">
+                    <item type="txt" lang="sel">-mɨn</item>
+                    <item type="cf" lang="sel">-mɨt</item>
+                    <item type="hn" lang="sel">2</item>
+                    <item type="variantTypes" lang="en">+fr. var. of</item>
+                    <item type="gls" lang="en">1PL</item>
+                    <item type="gls" lang="ru">1PL</item>
+                    <item type="gls" lang="en-x-ref" />
+                    <item type="msa" lang="en">v:pn</item>
+                  </morph>
+                </morphemes>
+                <item type="pos" lang="en">v</item>
+              </word>
+              <word>
+                <item type="punct" lang="sel">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="ru">Похоронили.</item>
+            <item type="gls" lang="en">We buried him.</item>
+            <item type="gls" lang="de" />
+            <item type="lit" lang="sel-Latn-x-source">ilʼlʼaüːtasamɨn.</item>
+            <item type="lit" lang="ru" />
+            <item type="lit" lang="sel-Cyrl-x-source">′иllа′ӱ̄тасамын.</item>
+            <item type="note" lang="en" />
+            <item type="note" lang="en" />
+          </phrase>
+        </phrases>
+      </paragraph>
+    </paragraphs>
+    <languages>
+      <language lang="en" font="Times New Roman" />
+      <language lang="sel" font="Charis SIL" vernacular="true" />
+      <language lang="ru" font="Charis SIL" />
+      <language lang="en-x-ref" font="Times New Roman" />
+      <language lang="de" font="Charis SIL" />
+      <language lang="sel-Latn-x-source" font="Charis SIL" />
+      <language lang="sel-Cyrl-x-source" font="Charis SIL" />
+    </languages>
+  </interlinear-text>
+</document>
