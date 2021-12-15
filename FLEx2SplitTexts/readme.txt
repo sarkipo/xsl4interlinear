@@ -1,6 +1,7 @@
 Alexandre Arkhipov, 2021
 
 The splitFlextext.xsl transform splits a single flextext file containing multiple texts into multiple flextext files (one per text).
+A sample file (all.flextext) contatining two texts is provided for testing.
 The splitFlextext.bat file can be used to run the transform using Saxon processor under Java on Windows.
 The free "HE" (Home Edition) of the 10 version of Saxon for Java is assumed.
 See Saxon page: https://www.saxonica.com/download/download_page.xml
