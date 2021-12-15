@@ -59,8 +59,7 @@
         <tier name="fr" template="tier-sent" itemtype="gls" lang="ru" cleanup="brackets"/>
         <tier name="fe" template="tier-sent" itemtype="gls" lang="en" cleanup="brackets"/>
         <tier name="fg" template="tier-sent" itemtype="gls" lang="de" cleanup="brackets"/>
-        <tier name="ltr" template="tier-sent" itemtype="lit" lang="ru" cleanup="brackets"/><!-- Kuzmina's literal Russian - when it's in Lit/Rus line -->
-        <!--<tier name="ltr" template="tier-sent" itemtype="gls" lang="sel-Cyrl-x-source" cleanup="brackets"/>--><!-- Kuzmina's literal Russian - when it's in Free/Sel-SC line -->
+        <tier name="ltr" template="tier-sent" itemtype="lit" lang="ru" cleanup="brackets"/>
         <tier name="nt" template="tier-sent" itemtype="note" lang="en" cleanup="brackets"/>
         <tier name="nto" template="tier-sent" itemtype="note" lang="sel-Cyrl-x-source" cleanup="brackets"/>
     </tiers>
